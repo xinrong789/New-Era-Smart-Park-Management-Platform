@@ -1,0 +1,34 @@
+.login {
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .lgbg {
+    background-size: contain;
+    width: 800px;
+    height: 480px;
+    .part {
+      width: 250px;
+      height: 420px;
+      padding: 60px 20px 0 20px;
+      background-color: white;
+      margin-left: auto;
+      .title {
+        margin-bottom: 40px;
+        .logo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        h1 {
+          font-size: 20px;
+          text-align: center;
+          color: #027cc5;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
