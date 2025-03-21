@@ -506,3 +506,99 @@ Mock.mock("http://www.demo.com/contractList", "post", (options: any) => {
     // 生成55条数据
   };
 });
+//账单管理
+Mock.mock("http://www.demo.com/billList", "post", (options: any) => {
+  const { page, pageSize, companyName, contact, phone } = JSON.parse(
+    options.body
+  );
+  console.log("后端账单管理接到参数", JSON.parse(options.body));
+  return {
+    code: 200,
+    message: "成功",
+    data: Mock.mock({
+      [`list|${pageSize}`]: [
+        {
+          accountNo: '@string("number", 6)',
+          "status|1": ["1", "2"],
+          "roomNo|1": [
+            "A1幢写字楼-201",
+            "B1幢写字楼-402",
+            "B2幢写字楼-701",
+            "C2幢写字楼-1601",
+          ],
+          "carNo|1": ["B109", "C227", "C106", "D158"],
+          "tel|1": ["@phone"],
+          "costName1|1": [1278.0, 2633.0, 3698.0],
+          costName2: "200元/月",
+          "costName3|1": ["25800/年", "19800/年"],
+          startDate: "2023-01-01",
+          endDate: "2024-01-01",
+          preferential: 0.0,
+          money: 26000.0,
+          "pay|1": ["微信", "支付宝", "现金", "银行卡转账"],
+        },
+      ],
+      total: 54,
+    }),
+    // 生成55条数据
+  };
+});
+//账号管理
+Mock.mock("http://www.demo.com/accountList", "post", (options: any) => {
+  //  const {page,pageSize,companyName,contact,phone}=JSON.parse(options.body);
+  console.log("后端账号管理接到参数", options);
+  return {
+    code: 200,
+    message: "成功",
+    data: {
+      list: [
+        {
+          id: 1001,
+          accountName: "xuchao",
+          auth: "admin",
+          person: "徐超",
+          tel: "188888888888",
+          department: "总裁办",
+          menu: menuList,
+        },
+        {
+          id: 1002,
+          accountName: "user01",
+          auth: "user",
+          person: "王丽丽",
+          tel: "17777777777",
+          department: "网推部",
+          menu: userMenuList,
+        },
+        {
+          id: 1003,
+          accountName: "manager01",
+          auth: "manager",
+          person: "刘伟",
+          tel: "16666666666",
+          department: "财务部",
+          menu: managerMenuList,
+        },
+        {
+          id: 1004,
+          accountName: "user02",
+          auth: "customize",
+          person: "张安定",
+          tel: "15555555555",
+          department: "企划部",
+          // menu: customizeMenuList,
+        },
+        {
+          id: 1005,
+          accountName: "laowang",
+          auth: "user",
+          person: "王大大",
+          tel: "14444444444",
+          department: "总裁办",
+          menu: userMenuList,
+        },
+      ],
+      total: 5,
+    },
+  };
+});

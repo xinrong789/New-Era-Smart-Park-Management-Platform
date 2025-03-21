@@ -12,25 +12,36 @@ import {
   Tag,
 } from "antd";
 import { DownloadOutlined, DeleteOutlined } from "@ant-design/icons";
-import { TableProps } from "antd/lib";
+import { TableProps } from "antd";
+import { getBillList } from "../../api/contract";
+import { useEffect, useMemo, useState } from "react";
+import exportToExcel from "../../utils/exportToExcel";
+const { RangePicker } = DatePicker;
 
 interface DataType {
-  key: string;
+  key?: string;
   accountNo: string;
-  status: string;
-  roomNo: string;
-  carNo: string;
-  tel: string;
-  constName1: string;
-  constName2: string;
-  constName3: string;
-  startDate: string;
-  endDate: string;
-  preferential: number;
-  money: number;
-  pay: string;
+  status?: string;
+  roomNo?: string;
+  carNo?: string;
+  tel?: string;
+  costName1?: string;
+  costName2?: string;
+  costName3?: string;
+  startDate?: string;
+  endDate?: string;
+  preferential?: number;
+  money?: number;
+  pay?: string;
 }
-const { RangePicker } = DatePicker;
+interface SearchType {
+  date: string[];
+  no: string;
+  status: string;
+  page: number;
+  pageSize: number;
+}
+
 function Bill() {
   const columns: TableProps<DataType>["columns"] = [
     {
@@ -151,23 +162,110 @@ function Bill() {
       },
     },
   ];
+
+  const [formData, setFormData] = useState<SearchType>({
+    date: [],
+    no: "",
+    status: "",
+    page: 1,
+    pageSize: 10,
+  });
+  const [dataList, setDataList] = useState<DataType[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [total, setTotal] = useState<number>(0);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [selectedRows, setSelectedRows] = useState<any>({ accountNo: "" });
+  const handleChange = (value: any, dateString: any) => {
+    console.log(value, dateString);
+    setFormData((prevState) => ({
+      ...prevState,
+      date: dateString,
+    }));
+  };
+  const handleChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      no: value,
+    }));
+  };
+  const handleChange2 = (value: string) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      status: value,
+    }));
+  };
+
+  const onSelectChange = (selectedRowKeys: React.Key[], selectedRows: any) => {
+    console.log(selectedRows);
+    setSelectedRowKeys(selectedRowKeys);
+    setSelectedRows(selectedRows);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+    preserveSelectedRowKeys: true,
+  };
+
+  const disabled = useMemo(() => {
+    return selectedRowKeys.length ? false : true;
+  }, [selectedRowKeys]);
+
+  const loadData = async () => {
+    setLoading(true);
+    const {
+      data: { list, total },
+    } = await getBillList({
+      page,
+      pageSize,
+      startDate: formData.date[0],
+      endDate: formData.date[1],
+      no: formData.no,
+      status: formData.status,
+    });
+    setLoading(false);
+    setDataList(list);
+    setTotal(total);
+  };
+  const header = [
+    "accountNo",
+    "status",
+    "roomNo",
+    "carNo",
+    "tel",
+    "costName1",
+    "costName2",
+    "costName3",
+    "startDate",
+    "endDate",
+    "preferential",
+    "money",
+    "pay",
+  ];
+  useEffect(() => {
+    loadData();
+  }, [page, pageSize]);
+  const onChange = (page: number, pageSize: number) => {
+    setPage(page);
+    setPageSize(pageSize);
+  };
   return (
     <div>
-      {" "}
       <Card>
         <Row gutter={16}>
           <Col span={6}>
-            <Statistic title="应收账单金额" value="6277363" />
+            <Statistic title="应收账单金额" value="16,876.38" />
           </Col>
           <Col span={6}>
-            <Statistic title="已缴账单金额" value="6,800.00" />
+            <Statistic title="已缴账单金额" value="6,952.00" />
           </Col>
           <Col span={6}>
-            {" "}
             <Statistic title="已退账单金额" value="2,355.23" />
           </Col>
           <Col span={6}>
-            {" "}
             <Statistic title="未缴账单金额" value="9,962.00" />
           </Col>
         </Row>
@@ -176,11 +274,19 @@ function Bill() {
         <Row gutter={16}>
           <Col span={6}>
             <p>账单日期</p>
-            <RangePicker style={{ width: "100%" }} />
+            <RangePicker
+              name="date"
+              style={{ width: "100%" }}
+              onChange={handleChange}
+            />
           </Col>
           <Col span={6}>
-            <p>房/车号</p>
-            <Input placeholder="请输入门牌号或者车位号"></Input>
+            <p>房/车号：</p>
+            <Input
+              placeholder="请输入门牌号或者车位号"
+              value={formData.no}
+              onChange={handleChange1}
+            />
           </Col>
           <Col span={6}>
             <p>缴费情况</p>
@@ -191,10 +297,11 @@ function Bill() {
                 { value: "2", label: "已缴纳" },
                 { value: "3", label: "未缴纳" },
               ]}
+              onChange={handleChange2}
             ></Select>
           </Col>
           <Col span={6}>
-            <Button type="primary" className="mr">
+            <Button type="primary" className="mr" onClick={loadData}>
               查询
             </Button>
             <Button>重置</Button>
@@ -202,24 +309,44 @@ function Bill() {
         </Row>
       </Card>
       <Card className="mt">
-        <Button type="primary" icon={<DownloadOutlined />}>
+        <Button
+          type="primary"
+          icon={<DownloadOutlined />}
+          disabled={disabled}
+          onClick={() => exportToExcel(selectedRows, header)}
+        >
           导出为Excel
         </Button>
-        <Button icon={<DeleteOutlined />} className="ml" danger type="primary">
+        <Button
+          icon={<DeleteOutlined />}
+          danger
+          className="ml"
+          type="primary"
+          disabled={disabled}
+        >
           批量作废
         </Button>
       </Card>
       <Card className="mt">
         <Table
-          dataSource={[]}
+          dataSource={dataList}
           columns={columns}
           pagination={false}
           rowKey={(record) => record.accountNo}
+          rowSelection={rowSelection}
           scroll={{ x: 1200 }}
         />
-        <Pagination className="fr mt" showQuickJumper></Pagination>
+        <Pagination
+          className="fr mt"
+          showQuickJumper
+          current={page}
+          pageSize={pageSize}
+          total={total}
+          onChange={onChange}
+        />
       </Card>
     </div>
   );
 }
+
 export default Bill;
