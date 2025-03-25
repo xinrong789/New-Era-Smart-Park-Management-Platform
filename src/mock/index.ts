@@ -328,7 +328,57 @@ const managerMenuList = [
     key: "/personal",
   },
 ];
-
+const customizeMenuList = [
+  {
+    icon: "DashboardOutlined",
+    label: "工作台",
+    key: "/dashboard",
+  },
+  {
+    icon: "TeamOutlined",
+    label: "租户管理",
+    key: "/users",
+    children: [
+      {
+        icon: "UnorderedListOutlined",
+        label: "租户列表",
+        key: "/users/list",
+      },
+    ],
+  },
+  {
+    icon: "LaptopOutlined",
+    label: "物业管理",
+    key: "/estate",
+    children: [
+      {
+        icon: "InsertRowLeftOutlined",
+        label: "楼宇管理",
+        key: "/estate/tenement",
+      },
+    ],
+  },
+  {
+    icon: "ToolOutlined",
+    label: "报修管理",
+    key: "/repair",
+  },
+  {
+    icon: "ToolOutlined",
+    label: "设备管理",
+    key: "/equipment",
+  },
+  {
+    icon: "ThunderboltOutlined",
+    label: "能源消耗",
+    key: "/energy",
+  },
+  {
+    icon: "UserOutlined",
+    label: "个人中心",
+    key: "/personal",
+  },
+];
 //menu interface
 Mock.mock("http://www.demo.com/menu", "get", (options: any) => {
   const token = sessionStorage.getItem("token");
@@ -587,6 +637,109 @@ Mock.mock("http://www.demo.com/accountList", "post", (options: any) => {
           tel: "15555555555",
           department: "企划部",
           // menu: customizeMenuList,
+        },
+        {
+          id: 1005,
+          accountName: "laowang",
+          auth: "user",
+          person: "王大大",
+          tel: "14444444444",
+          department: "总裁办",
+          menu: userMenuList,
+        },
+      ],
+      total: 5,
+    },
+  };
+});
+//设备管理
+Mock.mock("http://www.demo.com/equipmentList", "post", (options: any) => {
+  const { page, pageSize, companyName, contact, phone } = JSON.parse(
+    options.body
+  );
+
+  console.log("后端设备管理接到参数", JSON.parse(options.body));
+
+  return {
+    code: 200,
+    message: "成功",
+    data: Mock.mock({
+      [`list|${Number(pageSize) || 10}`]: [
+        {
+          "id|+1": 1001,
+          "name|1": [
+            "智能供水机组",
+            "A1幢写字楼供暖设备",
+            "园区大门入口闸机",
+            "球机摄像头",
+            "C1幢写字楼中央空调",
+            "B区充电桩",
+            "B2-21-电梯",
+            "路灯设备1",
+          ],
+          "no|1": ["CP-0NYU-1098", "H876-89", "CDU-B09-21"], // 设备编号
+          person: "@cname", // 负责人
+          "tel|1": ["@phone"], // 负责人电话
+          "time|1": ["20年", "15年", "10年"], // 理论寿命
+          rest: "7年", // 剩余寿命
+          "status|1": [1, 2, 3], // 1使用中 2维护中 3已损坏
+          "last|1": ["2023-11-11", "2024-05-06"], // 最后维护时间
+          "type|1": ["型号1", "型号2", "型号3"],
+          "from|1": [
+            "上海科技股份有限公司",
+            "武汉能源设备有限公司",
+            "重庆某某照明有限公司",
+          ],
+        },
+      ],
+      total: 66,
+    }),
+  };
+});
+//账号管理
+Mock.mock("http://www.demo.com/accountList", "post", (options: any) => {
+  //  const {page,pageSize,companyName,contact,phone}=JSON.parse(options.body);
+  console.log("后端账号管理接到参数", options);
+  return {
+    code: 200,
+    message: "成功",
+    data: {
+      list: [
+        {
+          id: 1001,
+          accountName: "xuchao",
+          auth: "admin",
+          person: "徐超",
+          tel: "188888888888",
+          department: "总裁办",
+          menu: menuList,
+        },
+        {
+          id: 1002,
+          accountName: "user01",
+          auth: "user",
+          person: "王丽丽",
+          tel: "17777777777",
+          department: "网推部",
+          menu: userMenuList,
+        },
+        {
+          id: 1003,
+          accountName: "manager01",
+          auth: "manager",
+          person: "刘伟",
+          tel: "16666666666",
+          department: "财务部",
+          menu: managerMenuList,
+        },
+        {
+          id: 1004,
+          accountName: "user02",
+          auth: "customize",
+          person: "张安定",
+          tel: "15555555555",
+          department: "企划部",
+          menu: customizeMenuList,
         },
         {
           id: 1005,
