@@ -1,39 +1,40 @@
-import "./index.scss"
-import logo from "../../assets/logo.png"
-import bg from "../../assets/bg.jpg"
-import lgbg from "../../assets/lgbg.jpg"
-import { UserOutlined, LockOutlined } from "@ant-design/icons"
-import { Button, Checkbox, Form, Input } from "antd"
+import "./index.scss";
+import logo from "../../assets/logo.png";
+import bg from "../../assets/bg.jpg";
+import lgbg from "../../assets/lgbg.jpg";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Form, Input } from "antd";
 
-import { login } from "../../api/users"
-import { log } from "console"
-import { setToken } from "../../store/login/authSlice"
-import { useDispatch } from "react-redux"
-import { Navigate, replace, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { login } from "../../api/users";
+import { log } from "console";
+import { setToken } from "../../store/login/authSlice";
+import { useDispatch } from "react-redux";
+import { Navigate, replace, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Login() {
-  const [form] = Form.useForm()
-  const dispatch = useDispatch()
-  const navitage = useNavigate()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const navitage = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
   function handleLogIn() {
     form
       .validateFields()
       .then(async (res) => {
-        setLoading(true)
+        setLoading(true);
         const {
-          data: { token, username }
-        } = await login(res)
-        setLoading(false)
-        dispatch(setToken(token))
-        sessionStorage.setItem("username", username)
-        navitage("/", { replace: true })
+          data: { token, username, btnAuth },
+        } = await login(res);
+        setLoading(false);
+        dispatch(setToken(token));
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("btnAuth", JSON.stringify(btnAuth));
+        navitage("/", { replace: true });
       })
       .catch((err) => {
-        setLoading(false)
-        console.log(err)
-      })
+        setLoading(false);
+        console.log(err);
+      });
   }
 
   return (
@@ -52,7 +53,7 @@ function Login() {
               rules={[
                 { required: true, message: "Please input your username!" },
                 { min: 3, message: "Please enter at least 3 digits" },
-                { max: 10, message: "Please enter no more than 10 digits" }
+                { max: 10, message: "Please enter no more than 10 digits" },
               ]}
             >
               <Input
@@ -64,7 +65,7 @@ function Login() {
             <Form.Item
               name="password"
               rules={[
-                { required: true, message: "Please input your password!" }
+                { required: true, message: "Please input your password!" },
               ]}
             >
               <Input.Password
@@ -87,6 +88,6 @@ function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-export default Login
+export default Login;

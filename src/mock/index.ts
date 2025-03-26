@@ -14,6 +14,7 @@ Mock.mock("http://www.demo.com/login", "post", (options: any) => {
       data: {
         username: "admin",
         token: "mocktoken123456admin",
+        btnAuth: ["add", "edit", "delete"],
       },
     };
   } else if (username === "manager" && password === "manager123456") {
@@ -23,6 +24,7 @@ Mock.mock("http://www.demo.com/login", "post", (options: any) => {
       data: {
         username: "manager",
         token: "mocktoken123456manager",
+        btnAuth: ["add", "edit"],
       },
     };
   } else if (username === "user" && password === "user123456") {
@@ -32,6 +34,7 @@ Mock.mock("http://www.demo.com/login", "post", (options: any) => {
       data: {
         username: "user",
         token: "mocktoken123456user",
+        btnAuth: ["add"],
       },
     };
   } else {

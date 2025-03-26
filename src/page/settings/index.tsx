@@ -15,7 +15,7 @@ import useDataList from "../../hooks/useDataList";
 import type { TreeDataNode, TreeProps } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import withPermissions from "../../utils/withPermissions";
+import withPermissions from "../../utils/withPermissions";
 
 interface MenuType {
   label: string;
@@ -48,10 +48,10 @@ function extractTreeKeys(data: any) {
   return keys;
 }
 function Settings() {
-  // const AuthButton: React.FC<any> = withPermissions(
-  //   ["delete"],
-  //   JSON.parse(sessionStorage.getItem("btnAuth") as string)
-  // )(Button);
+  const AuthButton: React.FC<any> = withPermissions(
+    ["delete"],
+    JSON.parse(sessionStorage.getItem("btnAuth") as string)
+  )(Button);
 
   const edit = (menu: MenuType[], accountName: string) => {
     setAccountName(accountName);
@@ -110,10 +110,9 @@ function Settings() {
               okText="是"
               cancelText="否"
             >
-              {/* <AuthButton size="small" type="primary" danger>
+              <AuthButton size="small" type="primary" danger>
                 删除账号
               </AuthButton>
-              <Button size="small" type="primary" danger>删除账号</Button> */}
             </Popconfirm>
           </>
         );
