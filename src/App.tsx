@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMenu } from "./store/login/authSlice";
 
 function App() {
-  console.log("1111" + process.env.REACT_APP_API_URL);
+  // console.log("1111" + process.env.REACT_APP_API_URL);
   const { token } = useSelector((state: any) => state.authSlice);
   const [routerss, setRouter] = useState<any>(null);
 
@@ -17,16 +17,18 @@ function App() {
 
   useEffect(() => {
     async function loadData() {
-      const { data } = await getMenu();
+      if (token) {
+        const { data } = await getMenu();
 
-      if (data.length) {
-        dispatch(setMenu(data));
-        const routers = generateRoutes(data); //动态创建的路由表
-        const myRoutes = [...routes];
-        myRoutes[0].children = routers;
-        myRoutes[0].children[0].index = true;
-        const router = createBrowserRouter(myRoutes);
-        setRouter(router);
+        if (data.length) {
+          dispatch(setMenu(data));
+          const routers = generateRoutes(data); //动态创建的路由表
+          const myRoutes = [...routes];
+          myRoutes[0].children = routers;
+          myRoutes[0].children[0].index = true;
+          const router = createBrowserRouter(myRoutes);
+          setRouter(router);
+        }
       } else {
         const router = createBrowserRouter(routes);
         setRouter(router);
