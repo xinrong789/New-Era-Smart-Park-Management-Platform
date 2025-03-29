@@ -4,7 +4,7 @@ import bg from "../../assets/bg.jpg";
 import lgbg from "../../assets/lgbg.jpg";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
-
+import type { FormProps } from "react-router-dom";
 import { login } from "../../api/users";
 import { log } from "console";
 import { setToken } from "../../store/login/authSlice";
@@ -17,7 +17,7 @@ function Login() {
   const dispatch = useDispatch();
   const navitage = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
-  function handleLogIn() {
+  function handleLogin() {
     form
       .validateFields()
       .then(async (res) => {
@@ -78,7 +78,7 @@ function Login() {
               <Button
                 type="primary"
                 style={{ width: "100%" }}
-                onClick={handleLogIn}
+                onClick={handleLogin}
                 loading={loading}
               >
                 Login

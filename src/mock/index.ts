@@ -6,7 +6,11 @@ Mock.setup({
 });
 // login interface
 Mock.mock("http://www.demo.com/login", "post", (options: any) => {
+  console.log("Received body:", options.body);
+  const loginData = { username: "admin", password: "admin123456" };
+  console.log("About to send POST request with data:", loginData);
   const { username, password } = JSON.parse(options.body);
+  // console.log(username, password);
   if (username === "admin" && password === "admin123456") {
     return {
       code: 200,
