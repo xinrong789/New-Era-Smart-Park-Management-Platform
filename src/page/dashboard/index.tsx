@@ -1,61 +1,61 @@
-import { Col, Row, Card, Progress, Statistic, Timeline, Tag } from "antd"
+import { Col, Row, Card, Progress, Statistic, Timeline, Tag } from "antd";
 import {
   RadarChartOutlined,
   SnippetsOutlined,
   DollarOutlined,
-  LaptopOutlined
-} from "@ant-design/icons"
-import "./index.scss"
-import ReactECharts from "echarts-for-react"
-import { getEnergyConsumptionData } from "../../api/dashboard"
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+  LaptopOutlined,
+} from "@ant-design/icons";
+import "./index.scss";
+import ReactECharts from "echarts-for-react";
+import { getEnergyConsumptionData } from "../../api/dashboard";
+import { useEffect, useState } from "react";
+
 const option2 = {
   title: {
-    text: "企业资质情况(家)"
+    text: "企业资质情况(家)",
   },
   tooltip: {
     trigger: "axis",
     axisPointer: {
-      type: "shadow"
-    }
+      type: "shadow",
+    },
   },
   legend: {},
   grid: {
     left: "3%",
     right: "4%",
     bottom: "3%",
-    containLabel: true
+    containLabel: true,
   },
   xAxis: {
     type: "category",
     boundaryGap: [0, 0.01],
-    data: ["2014", "2016", "2018", "2020", "2022", "2024"]
+    data: ["2014", "2016", "2018", "2020", "2022", "2024"],
   },
   yAxis: {
-    type: "value"
+    type: "value",
   },
   series: [
     {
       name: "科技企业",
       type: "bar",
-      data: [40, 220, 378, 658, 1122, 1200]
+      data: [40, 220, 378, 658, 1122, 1200],
     },
     {
       name: "高新企业",
       type: "bar",
-      data: [20, 39, 443, 490, 559, 762]
+      data: [20, 39, 443, 490, 559, 762],
     },
     {
       name: "国营企业",
       type: "bar",
-      data: [78, 167, 229, 330, 380, 420]
-    }
-  ]
-}
+      data: [78, 167, 229, 330, 380, 420],
+    },
+  ],
+};
 const option3 = {
   legend: {
-    top: "10px"
+    top: "10px",
   },
   series: [
     {
@@ -65,7 +65,7 @@ const option3 = {
       center: ["50%", "50%"],
       roseType: "area",
       itemStyle: {
-        borderRadius: 8
+        borderRadius: 8,
       },
       data: [
         { value: 40, name: "在营" },
@@ -74,66 +74,66 @@ const option3 = {
         { value: 30, name: "续签" },
         { value: 28, name: "新签" },
         { value: 26, name: "待租" },
-        { value: 22, name: "退租" }
-      ]
-    }
-  ]
-}
+        { value: 22, name: "退租" },
+      ],
+    },
+  ],
+};
 
 function Dashboard() {
   const initialOption = {
     title: {
-      text: "当日能源消耗"
+      text: "当日能源消耗",
     },
     tooltip: {
-      trigger: "axis"
+      trigger: "axis",
     },
     legend: {
-      data: []
+      data: [],
     },
     grid: {
       left: "3%",
       right: "4%",
       bottom: "3%",
-      containLabel: true
+      containLabel: true,
     },
     toolbox: {
       feature: {
-        saveAsImage: {}
-      }
+        saveAsImage: {},
+      },
     },
     xAxis: {
       type: "category",
       boundaryGap: false,
-      data: ["0:00", "4:00", "8:00", "12:00", "16:00", "20:00", "24:00"]
+      data: ["0:00", "4:00", "8:00", "12:00", "16:00", "20:00", "24:00"],
     },
     yAxis: {
-      type: "value"
+      type: "value",
     },
-    series: []
-  }
-  const [data, setdata] = useState(initialOption)
+    series: [],
+  };
+  const [data, setdata] = useState(initialOption);
   useEffect(() => {
     const loadData = async () => {
-      const { data: apidata } = await getEnergyConsumptionData()
+      const { data: apidata } = await getEnergyConsumptionData();
       // console.log(data)
       const dataList = apidata.map((item: any) => ({
         name: item.name,
         data: item.data,
         type: "line",
-        stack: "Total"
-      }))
+        stack: "Total",
+      }));
       const updataOption = {
         ...data,
         legend: {
-          data: dataList.map((item: any) => item.name)
+          data: dataList.map((item: any) => item.name),
         },
-        series: dataList
-      }
-      setdata(updataOption)
-    }
-    loadData()
-  }, [])
+        series: dataList,
+      };
+      setdata(updataOption);
+    };
+    loadData();
+  }, []);
   return (
     <div className="dashboard">
       <Row gutter={16}>
@@ -227,7 +227,7 @@ function Dashboard() {
                     <>
                       <Tag color="green">进场</Tag>08:24车辆 京A66666
                     </>
-                  )
+                  ),
                 },
                 {
                   children: (
@@ -235,14 +235,14 @@ function Dashboard() {
                       <Tag color="red">出场</Tag>09:15 车辆 京A66666{" "}
                     </>
                   ),
-                  color: "red"
+                  color: "red",
                 },
                 {
                   children: (
                     <>
                       <Tag color="green">进场</Tag>09:22 车辆 京A23456{" "}
                     </>
-                  )
+                  ),
                 },
                 {
                   children: (
@@ -250,28 +250,28 @@ function Dashboard() {
                       <Tag color="red">出场</Tag>10:43 车辆 京A18763{" "}
                     </>
                   ),
-                  color: "red"
+                  color: "red",
                 },
                 {
                   children: (
                     <>
                       <Tag color="green">进场</Tag>13:38 车辆 京A88888{" "}
                     </>
-                  )
+                  ),
                 },
                 {
                   children: (
                     <>
                       <Tag color="green">进场</Tag>14:46 车辆 京A23456{" "}
                     </>
-                  )
-                }
+                  ),
+                },
               ]}
             ></Timeline>
           </Card>
         </Col>
       </Row>
     </div>
-  )
+  );
 }
-export default Dashboard
+export default Dashboard;

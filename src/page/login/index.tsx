@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import type { FormProps } from "react-router-dom";
 import { login } from "../../api/users";
-import { log } from "console";
+// import { log } from "console";
 import { setToken } from "../../store/login/authSlice";
 import { useDispatch } from "react-redux";
 import { Navigate, replace, useNavigate } from "react-router-dom";

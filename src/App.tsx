@@ -3,7 +3,7 @@ import { routes } from "./router";
 import { useEffect, useState, Suspense } from "react";
 import { generateRoutes } from "./utils/generatesRoutes";
 
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { getMenu } from "./api/users";
 import { useDispatch, useSelector } from "react-redux";
 import { setMenu } from "./store/login/authSlice";
@@ -20,12 +20,28 @@ function App() {
       if (token) {
         const { data } = await getMenu();
 
+        // if (data.length) {
+        //   dispatch(setMenu(data));
+        //   const routers = generateRoutes(data); //动态创建的路由表
+        //   const myRoutes = [...routes];
+        //   myRoutes[0].children = routers;
+        //   myRoutes[0].children[0].index = true;
+        //   const router = createBrowserRouter(myRoutes);
+        //   setRouter(router);
+        // }
         if (data.length) {
           dispatch(setMenu(data));
-          const routers = generateRoutes(data); //动态创建的路由表
+          const routers = generateRoutes(data); // 动态生成的 routes
+
+          // ✅ 插入默认跳转规则：访问 "/" 自动跳到 dashboard 或 routers[0].path
+          const defaultRedirect = {
+            index: true,
+            element: <Navigate to={routers[0]?.path || "dashboard"} replace />,
+          };
+
           const myRoutes = [...routes];
-          myRoutes[0].children = routers;
-          myRoutes[0].children[0].index = true;
+          myRoutes[0].children = [defaultRedirect, ...routers];
+
           const router = createBrowserRouter(myRoutes);
           setRouter(router);
         }

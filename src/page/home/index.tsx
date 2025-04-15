@@ -1,18 +1,18 @@
-import { theme, Layout } from "antd"
+import { theme, Layout } from "antd";
 
-import { useState } from "react"
-import NavLeft from "../../components/navLeft"
-import MyBreadCrubmb from "../../components/breadCrumb"
-import Myheader from "../../components/header"
-import { Outlet } from "react-router-dom"
+import { useState } from "react";
+import NavLeft from "../../components/navLeft";
+import MyBreadCrumb from "../../components/breadCrumb";
+import Myheader from "../../components/header";
+import { Outlet } from "react-router-dom";
 
-const { Header, Content, Footer, Sider } = Layout
+const { Header, Content, Footer, Sider } = Layout;
 
 function Home() {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer, borderRadiusLG }
-  } = theme.useToken()
+    token: { colorBgContainer },
+  } = theme.useToken();
 
   return (
     <div className="home">
@@ -29,7 +29,7 @@ function Home() {
             style={{
               paddingRight: "20px",
               background: colorBgContainer,
-              textAlign: "right"
+              textAlign: "right",
             }}
           >
             <Myheader />
@@ -39,11 +39,11 @@ function Home() {
               margin: "0 16px",
               height: "90vh",
               overflowY: "auto",
-              overflowX: "hidden"
+              overflowX: "hidden",
             }}
           >
-            <MyBreadCrubmb />
-            <Outlet></Outlet>
+            <MyBreadCrumb />
+            <Outlet />
           </Content>
           <Footer style={{ textAlign: "center" }}>
             Ant Design ©{new Date().getFullYear()} Created by Ant UED
@@ -51,6 +51,6 @@ function Home() {
         </Layout>
       </Layout>
     </div>
-  )
+  );
 }
-export default Home
+export default Home;

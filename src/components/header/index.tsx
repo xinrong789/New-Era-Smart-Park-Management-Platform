@@ -12,12 +12,12 @@ import { useNavigate } from "react-router-dom";
 const items: MenuProps["items"] = [
   {
     key: "1",
-    label: <a target="_blank">个人中心</a>,
+    label: <a target="_blank">Personal Center</a>,
     icon: <UserOutlined />,
   },
   {
     key: "2",
-    label: <a target="_blank">退出登录</a>,
+    label: <a target="_blank">Log out</a>,
     icon: <PoweroffOutlined />,
   },
 ];

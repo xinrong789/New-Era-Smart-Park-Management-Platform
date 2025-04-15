@@ -53,120 +53,120 @@ Mock.mock("http://www.demo.com/login", "post", (options: any) => {
 const menuList = [
   {
     icon: "DashboardOutlined",
-    label: "工作台",
+    label: "Workbench",
     key: "/dashboard",
   },
   {
     icon: "TeamOutlined",
-    label: "租户管理",
+    label: "Tenant Management",
     key: "/users",
     children: [
       {
         icon: "UnorderedListOutlined",
-        label: "租户列表",
+        label: "Tenant List",
         key: "/users/list",
       },
       {
         icon: "UserAddOutlined",
-        label: "新增租户",
+        label: "Add new tenants",
         key: "/users/add",
       },
     ],
   },
   {
     icon: "LaptopOutlined",
-    label: "物业管理",
+    label: "Property Management",
     key: "/estate",
     children: [
       {
         icon: "InsertRowLeftOutlined",
-        label: "楼宇管理",
+        label: "Building Management",
         key: "/estate/tenement",
       },
       {
         icon: "BankOutlined",
-        label: "房间管理",
+        label: "Room Management",
         key: "/estate/room",
       },
       {
         icon: "TruckOutlined",
-        label: "车辆信息",
+        label: "Vehicle Information",
         key: "/estate/car",
       },
     ],
   },
   {
     icon: "ToolOutlined",
-    label: "报修管理",
+    label: "Repair management",
     key: "/repair",
   },
   {
     icon: "DollarOutlined",
-    label: "财务管理",
+    label: "financial management",
     key: "/finance",
     children: [
       {
         icon: "ProfileOutlined",
-        label: "合同管理",
+        label: "Contract Management",
         key: "/finance/contract",
       },
       {
         icon: "FrownOutlined",
-        label: "合同详情",
+        label: "Contract details",
         key: "/finance/contractdetail",
       },
       {
         icon: "FileTextOutlined",
-        label: "账单管理",
+        label: "Billing Management",
         key: "/finance/bill",
       },
     ],
   },
   {
     icon: "TransactionOutlined",
-    label: "招商管理",
+    label: "Merchants Management",
     key: "/merchants",
   },
   {
     icon: "FundProjectionScreenOutlined",
-    label: "运营管理",
+    label: "operations management",
     key: "/operation",
     children: [
       {
         icon: "FundViewOutlined",
-        label: "运营总览",
+        label: "Operation Overview",
         key: "/operation/all",
       },
       {
         icon: "ReadOutlined",
-        label: "文章发布",
+        label: "Article Release",
         key: "/operation/article",
       },
       {
         icon: "CommentOutlined",
-        label: "内容评论",
+        label: "Content Comments",
         key: "/operation/comments",
       },
     ],
   },
   {
     icon: "ToolOutlined",
-    label: "设备管理",
+    label: "Device Management",
     key: "/equipment",
   },
   {
     icon: "ThunderboltOutlined",
-    label: "能源消耗",
+    label: "Energy consumption",
     key: "/energy",
   },
   {
     icon: "SettingOutlined",
-    label: "系统设置",
+    label: "System Settings",
     key: "/settings",
   },
   {
     icon: "UserOutlined",
-    label: "个人中心",
+    label: "Personal Center",
     key: "/personal",
   },
 ];
@@ -335,57 +335,7 @@ const managerMenuList = [
     key: "/personal",
   },
 ];
-const customizeMenuList = [
-  {
-    icon: "DashboardOutlined",
-    label: "工作台",
-    key: "/dashboard",
-  },
-  {
-    icon: "TeamOutlined",
-    label: "租户管理",
-    key: "/users",
-    children: [
-      {
-        icon: "UnorderedListOutlined",
-        label: "租户列表",
-        key: "/users/list",
-      },
-    ],
-  },
-  {
-    icon: "LaptopOutlined",
-    label: "物业管理",
-    key: "/estate",
-    children: [
-      {
-        icon: "InsertRowLeftOutlined",
-        label: "楼宇管理",
-        key: "/estate/tenement",
-      },
-    ],
-  },
-  {
-    icon: "ToolOutlined",
-    label: "报修管理",
-    key: "/repair",
-  },
-  {
-    icon: "ToolOutlined",
-    label: "设备管理",
-    key: "/equipment",
-  },
-  {
-    icon: "ThunderboltOutlined",
-    label: "能源消耗",
-    key: "/energy",
-  },
-  {
-    icon: "UserOutlined",
-    label: "个人中心",
-    key: "/personal",
-  },
-];
+
 //menu interface
 Mock.mock("http://www.demo.com/menu", "get", (options: any) => {
   const token = sessionStorage.getItem("token");
@@ -739,15 +689,15 @@ Mock.mock("http://www.demo.com/accountList", "post", (options: any) => {
           department: "财务部",
           menu: managerMenuList,
         },
-        {
-          id: 1004,
-          accountName: "user02",
-          auth: "customize",
-          person: "张安定",
-          tel: "15555555555",
-          department: "企划部",
-          menu: customizeMenuList,
-        },
+        // {
+        //   id: 1004,
+        //   accountName: "user02",
+        //   auth: "customize",
+        //   person: "张安定",
+        //   tel: "15555555555",
+        //   department: "企划部",
+        //   menu: customizeMenuList,
+        // },
         {
           id: 1005,
           accountName: "laowang",
