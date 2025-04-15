@@ -60,6 +60,7 @@ function NavLeft() {
         theme="dark"
         items={menuData}
         onClick={handleClick}
+        selectedKeys={[location.pathname]}
       />
     </div>
   );
