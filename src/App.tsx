@@ -20,15 +20,6 @@ function App() {
       if (token) {
         const { data } = await getMenu();
 
-        // if (data.length) {
-        //   dispatch(setMenu(data));
-        //   const routers = generateRoutes(data); //动态创建的路由表
-        //   const myRoutes = [...routes];
-        //   myRoutes[0].children = routers;
-        //   myRoutes[0].children[0].index = true;
-        //   const router = createBrowserRouter(myRoutes);
-        //   setRouter(router);
-        // }
         if (data.length) {
           dispatch(setMenu(data));
           const routers = generateRoutes(data); // 动态生成的 routes
@@ -63,7 +54,7 @@ function App() {
       </div>
     );
   } else {
-    return <div>再等等</div>;
+    return <div>Please Wait </div>;
   }
 }
 

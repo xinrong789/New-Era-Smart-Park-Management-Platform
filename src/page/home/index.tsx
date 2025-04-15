@@ -46,7 +46,8 @@ function Home() {
             <Outlet />
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design ©{new Date().getFullYear()} Created by Ant UED
+            New Era Smart Park Management Platform ©{new Date().getFullYear()}{" "}
+            Created by Xinrong Li
           </Footer>
         </Layout>
       </Layout>
