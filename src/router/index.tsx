@@ -24,14 +24,14 @@ export const routes: RouteObject[] = [
       </RequireAuth>
     ),
   },
-  // {
-  //   path: "/dashboard",
-  //   element: (
-  //     <RequireAuth allowed={true} redirectTo="/login">
-  //       <Dashboard /> // 确保导入Dashboard组件
-  //     </RequireAuth>
-  //   ),
-  // },
+  {
+    path: "/dashboard",
+    element: (
+      <RequireAuth allowed={true} redirectTo="/login">
+        <Dashboard /> // 确保导入Dashboard组件
+      </RequireAuth>
+    ),
+  },
   {
     path: "*",
     element: <NotFound />,
