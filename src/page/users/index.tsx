@@ -9,207 +9,213 @@ import {
   Pagination,
   Tag,
   Popconfirm,
-  message
-} from "antd"
-import React, { useState, useEffect, useMemo, useCallback } from "react"
-import type { DataType } from "./interface"
-import { getUserList } from "../../api/userList"
-import type { PaginationProps } from "antd"
-import { deleteUser } from "../../api/userList"
-import { batchDeleteUser } from "../../api/userList"
-import UserForm from "./userForm"
-import { useDispatch } from "react-redux"
-import { setUserData } from "../../store/user/userSlice"
+  message,
+  Divider,
+} from "antd";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import type { DataType } from "./interface";
+import { getUserList } from "../../api/userList";
+import type { PaginationProps } from "antd";
+import { deleteUser } from "../../api/userList";
+import { batchDeleteUser } from "../../api/userList";
+import UserForm from "./userForm";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../store/user/userSlice";
+import "./index.scss";
 
 interface searchType {
-  companyName: string
-  contact: string
-  phone: string
+  companyName: string;
+  contact: string;
+  phone: string;
 }
 function Users() {
-  const [dataList, setDataList] = useState<DataType[]>([])
-  const [page, setPage] = useState<number>(1)
-  const [pageSize, setPageSize] = useState<number>(10)
-  const [total, setTotal] = useState<number>(0)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [title, setTitle] = useState<string>("")
-  const dispatch = useDispatch()
+  const [dataList, setDataList] = useState<DataType[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [total, setTotal] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("");
+  const dispatch = useDispatch();
   const disabled = useMemo(() => {
-    return selectedRowKeys.length ? false : true
-  }, [selectedRowKeys])
+    return selectedRowKeys.length ? false : true;
+  }, [selectedRowKeys]);
 
   useEffect(() => {
-    loadData()
-  }, [page, pageSize])
+    loadData();
+  }, [page, pageSize]);
+
   const loadData = async () => {
-    setLoading(true)
+    setLoading(true);
     const {
-      data: { list, total }
-    } = await getUserList({ ...formData, page, pageSize })
-    setLoading(false)
-    setDataList(list)
-    setTotal(total)
-  }
+      data: { list, total },
+    } = await getUserList({ ...formData, page, pageSize });
+    setLoading(false);
+    setDataList(list);
+    setTotal(total);
+  };
 
   const [formData, setFormData] = useState<searchType>({
     companyName: "",
     contact: "",
-    phone: ""
-  })
+    phone: "",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
   const onSelectChange = (selectedRowKeys: React.Key[]) => {
-    setSelectedRowKeys(selectedRowKeys)
-  }
+    setSelectedRowKeys(selectedRowKeys);
+  };
   const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange
-  }
+    selectedRowKeys, //ES6 selectedRowKeys=selectedRowKeys
+    onChange: onSelectChange,
+  };
   const onChange: PaginationProps["onChange"] = (page, pageSize) => {
-    setPage(page)
-    setPageSize(pageSize)
-  }
+    setPage(page);
+    setPageSize(pageSize);
+  };
   const reset = () => {
-    setSelectedRowKeys([])
+    setSelectedRowKeys([]);
     setFormData({
       companyName: "",
       contact: "",
-      phone: ""
-    })
-    setPage(1)
-    setPageSize(10)
-  }
+      phone: "",
+    });
+    setPage(1);
+    setPageSize(10);
+  };
 
   const confirm = async function (id: string) {
-    const { data } = await deleteUser(id)
-    message.success(data)
-    loadData()
-  }
+    const { data } = await deleteUser(id);
+    message.success(data);
+    loadData();
+  };
   const batchDelete = async () => {
-    const { data } = await batchDeleteUser(selectedRowKeys)
-    message.success(data)
-    loadData()
-  }
+    const { data } = await batchDeleteUser(selectedRowKeys);
+    message.success(data);
+    loadData();
+  };
   const edit = (record: DataType) => {
-    setIsModalOpen(true)
-    setTitle("编辑企业")
-    dispatch(setUserData(record))
-  }
+    setIsModalOpen(true);
+    setTitle("edit");
+    dispatch(setUserData(record));
+  };
   const add = () => {
-    setIsModalOpen(true)
-    setTitle("新增企业")
-    dispatch(setUserData({}))
-  }
+    setIsModalOpen(true);
+    setTitle("add");
+    dispatch(setUserData({}));
+  };
 
   const hideModal = useCallback(() => {
-    setIsModalOpen(false)
-  }, [])
+    setIsModalOpen(false);
+  }, []);
+
   const columns: TableProps<DataType>["columns"] = [
     {
-      title: "no",
+      title: "No",
       key: "index",
       render(value, record, index) {
-        return index + 1
-      }
+        return index + 1;
+      },
     },
     {
-      title: "客户名称",
+      title: "Customer Name",
       key: "name",
-      dataIndex: "name"
+      dataIndex: "name",
     },
     {
-      title: "经营状态",
+      title: "Company Name",
+      key: "companyName",
+      dataIndex: "companyName",
+    },
+    {
+      title: "ABN",
+      key: "abn",
+      dataIndex: "abn",
+    },
+    {
+      title: "ACN",
+      key: "acn",
+      dataIndex: "acn",
+    },
+
+    {
+      title: "Business Status",
       key: "status",
       dataIndex: "status",
       render(value) {
         if (value == 1) {
-          return <Tag color="green">营业中</Tag>
+          return <Tag color="green">Active</Tag>;
         } else if (value == 2) {
-          return <Tag color="#f50">暂停营业</Tag>
+          return <Tag color="#f50">Temporarily Closed</Tag>;
         } else if (value == 3) {
-          return <Tag color="red">已关闭</Tag>
+          return <Tag color="red">Closed</Tag>;
         }
-      }
-    },
-    {
-      title: "联系电话",
-      key: "tel",
-      dataIndex: "tel"
-    },
-    {
-      title: "所属行业",
-      key: "business",
-      dataIndex: "business"
-    },
-    {
-      title: "邮箱",
-      key: "email",
-      dataIndex: "email"
-    },
-    {
-      title: "统一信用代码",
-      key: "creditCode",
-      dataIndex: "creditCode"
-    },
-    {
-      title: "工商注册号",
-      key: "industryNum",
-      dataIndex: "industryNum"
+      },
     },
 
     {
-      title: "组织结构代码",
-      key: "organizationCode",
-      dataIndex: "organizationCode"
+      title: "Phone Number",
+      key: "tel",
+      dataIndex: "tel",
     },
     {
-      title: "法人名",
-      key: "legalPerson",
-      dataIndex: "legalPerson"
+      title: "Email",
+      key: "email",
+      dataIndex: "email",
     },
     {
-      title: "操作",
+      title: "Industry",
+      key: "business",
+      dataIndex: "business",
+    },
+    {
+      title: "Shareholders",
+      key: "shareholders",
+      dataIndex: "shareholders",
+      render(value) {
+        return Array.isArray(value) ? value.join(", ") : value;
+      },
+    },
+    {
+      title: "Actions",
       key: "operate",
       render(value, record, index) {
         return (
-          <>
-            <div style={{ display: "flex" }}>
-              {" "}
-              <Button
-                type="primary"
-                size="small"
-                onClick={() => {
-                  edit(record)
-                }}
-              >
-                编辑
+          <div style={{ display: "flex" }}>
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => {
+                edit(record);
+              }}
+            >
+              Edit
+            </Button>
+            <Popconfirm
+              title="Delete Confirmation"
+              description="Are you sure you want to delete this?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => confirm(record.id)}
+            >
+              <Button type="primary" danger className="ml" size="small">
+                Delete
               </Button>
-              <Popconfirm
-                title="删除确认"
-                description="确定要删除吗？"
-                okText="是"
-                cancelText="否"
-                onConfirm={() => confirm(record.id)}
-              >
-                <Button type="primary" danger className="ml" size="small">
-                  删除
-                </Button>
-              </Popconfirm>
-            </div>
-          </>
-        )
-      }
-    }
-  ]
+            </Popconfirm>
+          </div>
+        );
+      },
+    },
+  ];
+
   return (
     <div className="users">
       <MyUserForm
@@ -223,7 +229,7 @@ function Users() {
         <Row gutter={16}>
           {" "}
           <Col span={7}>
-            <p>企业名称:</p>
+            <p>Company Name:</p>
             <Input
               value={formData.companyName}
               onChange={handleChange}
@@ -231,7 +237,7 @@ function Users() {
             ></Input>{" "}
           </Col>
           <Col span={7}>
-            <p>联系人:</p>
+            <p className="usertitle">Contact:</p>
             <Input
               value={formData.contact}
               onChange={handleChange}
@@ -239,7 +245,7 @@ function Users() {
             ></Input>{" "}
           </Col>
           <Col span={7}>
-            <p>联系电话:</p>
+            <p className="usertitle">Tel:</p>
             <Input
               value={formData.phone}
               onChange={handleChange}
@@ -248,17 +254,17 @@ function Users() {
           </Col>
           <Col span={3}>
             <Button type="primary" onClick={loadData}>
-              查询
+              Search
             </Button>
             <Button className="ml" onClick={reset}>
-              重置
+              Reset
             </Button>
           </Col>
         </Row>
       </Card>
       <Card className="mt tr">
         <Button type="primary" onClick={add}>
-          新增企业
+          New Enterprises
         </Button>
         <Button
           type="primary"
@@ -267,11 +273,13 @@ function Users() {
           disabled={disabled}
           onClick={batchDelete}
         >
-          批量删除
+          Batch Deletion
         </Button>
       </Card>
       <Card className="mt">
         <Table
+          scroll={{ x: "max-content" }}
+          size="middle"
           columns={columns}
           dataSource={dataList}
           rowKey={(record) => record.id}
@@ -286,12 +294,12 @@ function Users() {
           pageSize={pageSize}
           showSizeChanger
           showQuickJumper
-          showTotal={(total) => `共 ${total} 条`}
+          showTotal={(total) => `Total ${total} items`}
           onChange={onChange}
         />
       </Card>
     </div>
-  )
+  );
 }
-const MyUserForm = React.memo(UserForm)
-export default Users
+const MyUserForm = React.memo(UserForm);
+export default Users;

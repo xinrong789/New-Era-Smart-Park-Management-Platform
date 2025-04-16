@@ -58,20 +58,9 @@ const menuList = [
   },
   {
     icon: "TeamOutlined",
+
     label: "Tenant Management",
-    key: "/users",
-    children: [
-      {
-        icon: "UnorderedListOutlined",
-        label: "Tenant List",
-        key: "/users/list",
-      },
-      {
-        icon: "UserAddOutlined",
-        label: "Add new tenants",
-        key: "/users/add",
-      },
-    ],
+    key: "/users/list",
   },
   {
     icon: "LaptopOutlined",
@@ -342,25 +331,25 @@ Mock.mock("http://www.demo.com/menu", "get", (options: any) => {
   if (token == "mocktoken123456admin") {
     return {
       code: 200,
-      message: "请求成功",
+      message: "request success",
       data: menuList,
     };
   } else if (token == "mocktoken123456user") {
     return {
       code: 200,
-      message: "请求成功",
+      message: "request success",
       data: userMenuList,
     };
   } else if (token == "mocktoken123456manager") {
     return {
       code: 200,
-      message: "请求成功",
+      message: "request success",
       data: managerMenuList,
     };
   } else {
     return {
       code: 200,
-      message: "失败",
+      message: "failed",
       data: [],
     };
   }
@@ -370,7 +359,7 @@ Mock.mock("http://www.demo.com/menu", "get", (options: any) => {
 Mock.mock("http://www.demo.com/energyConsumption", "get", () => {
   return {
     code: 200,
-    message: "请求成功",
+    message: "Request Success",
     data: [
       { name: "Coal", data: [120, 132, 101, 134, 90, 230, 210] },
       { name: "Gas", data: [220, 182, 191, 234, 290, 330, 310] },
@@ -382,41 +371,42 @@ Mock.mock("http://www.demo.com/energyConsumption", "get", () => {
 });
 Mock.Random.extend({
   phone: function () {
-    var phonePrefixs = ["13", "14", "15", "16", "17", "18", "19"]; // 自己写前缀哈
-    return this.pick(phonePrefixs) + Mock.mock(/\d{9}/); //Number()
+    return "04" + Mock.mock(/\d{8}/);
   },
 });
+
+//userList
 
 Mock.mock("http://www.demo.com/userList", "post", (options: any) => {
   const { pageSize, page, companyName, contact, phone } = JSON.parse(
     options.body
   );
-  console.log("hahha", page, pageSize, companyName, contact, phone);
 
   return {
     code: 200,
-    message: "qingqiuchenggong",
+    message: "Request successful",
     data: Mock.mock({
       [`list|${pageSize}`]: [
         {
-          id: "@string('number',6)", //随机生成一个六位数字id
-          name: "@cname", //随机生成一个人名
-          "status|1": ["1", "2", "3"],
-          tel: "@phone",
+          id: "@string('number',6)", // ID
+          name: "@name", // Customer Name
+          companyName:
+            "@word(4,8) @pick(['Solutions', 'Systems', 'Corporation', 'Technologies', 'Enterprises', 'Group', 'Holdings']) Pty Ltd", // 英文公司名
+          abn: "@string('number',11)", // ABN
+          acn: "@string('number',9)", // ACN
+          "status|1": [1, 1, 1, 1, 2, 3], // Business Status
+          tel: "@phone", // Phone Number
+          email: "@email", // Email
           "business|1": [
-            "制造业",
-            "互联网",
-            "新媒体",
-            "美业",
-            "新能源",
-            "物流",
-            "电商",
-          ],
-          email: "@email",
-          creditCode: "@string('number',18)",
-          industryNum: "@string('number',15)",
-          organizationCode: "@string('upper',9)",
-          legalPerson: "@cname",
+            "Manufacturing",
+            "Information Technology",
+            "New Media",
+            "Beauty Industry",
+            "Renewable Energy",
+            "Logistics",
+            "E-Commerce",
+          ], // Industry
+          shareholders: "@name", // One shareholder
         },
       ],
       total: 78,

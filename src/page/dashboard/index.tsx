@@ -11,9 +11,6 @@ import { getEnergyConsumptionData } from "../../api/dashboard";
 import { useEffect, useState } from "react";
 
 const option2 = {
-  title: {
-    text: "企业资质情况(家)",
-  },
   tooltip: {
     trigger: "axis",
     axisPointer: {
@@ -37,17 +34,17 @@ const option2 = {
   },
   series: [
     {
-      name: "科技企业",
+      name: "Technology Enterprises",
       type: "bar",
       data: [40, 220, 378, 658, 1122, 1200],
     },
     {
-      name: "高新企业",
+      name: "High-Tech Enterprises",
       type: "bar",
       data: [20, 39, 443, 490, 559, 762],
     },
     {
-      name: "国营企业",
+      name: "State-Owned Enterprises",
       type: "bar",
       data: [78, 167, 229, 330, 380, 420],
     },
@@ -68,13 +65,11 @@ const option3 = {
         borderRadius: 8,
       },
       data: [
-        { value: 40, name: "在营" },
-        { value: 38, name: "已租" },
-        { value: 32, name: "出租" },
-        { value: 30, name: "续签" },
-        { value: 28, name: "新签" },
-        { value: 26, name: "待租" },
-        { value: 22, name: "退租" },
+        { value: 40, name: "Operating" },
+        { value: 38, name: "Leased" },
+        { value: 30, name: "Recently Leased" },
+        { value: 26, name: "Vacant" },
+        { value: 22, name: "Terminated" },
       ],
     },
   ],
@@ -82,9 +77,9 @@ const option3 = {
 
 function Dashboard() {
   const initialOption = {
-    title: {
-      text: "当日能源消耗",
-    },
+    // title: {
+    //   text: "",
+    // },
     tooltip: {
       trigger: "axis",
     },
@@ -112,10 +107,10 @@ function Dashboard() {
     },
     series: [],
   };
-  const [data, setdata] = useState(initialOption);
+  const [data, setData] = useState(initialOption);
   useEffect(() => {
     const loadData = async () => {
-      const { data: apidata } = await getEnergyConsumptionData();
+      const { data: apidata } = await getEnergyConsumptionData(); //data: apidata  change name
       // console.log(data)
       const dataList = apidata.map((item: any) => ({
         name: item.name,
@@ -130,7 +125,7 @@ function Dashboard() {
         },
         series: dataList,
       };
-      setdata(updataOption);
+      setData(updataOption);
     };
     loadData();
   }, []);
@@ -143,7 +138,7 @@ function Dashboard() {
           <Card className="clearfix">
             <div className="fl area">
               <h2>12497</h2>
-              <p>园区总面积（平方米）</p>
+              <p>Total area(m²)</p>
             </div>
             <div className="fr">
               <RadarChartOutlined className="icon" />
@@ -154,8 +149,9 @@ function Dashboard() {
           <Card className="clearfix">
             <div className="fl area">
               <h2>8635</h2>
-              <p>总租赁面积（平方米）</p>
+              <p>Total Leased Area(m²)</p>
             </div>
+
             <div className="fr">
               <RadarChartOutlined className="icon" />
             </div>
@@ -165,7 +161,7 @@ function Dashboard() {
           <Card className="clearfix">
             <div className="fl area">
               <h2>13478</h2>
-              <p>园区总产值（万元）</p>
+              <p>Total Output Value(AUD)</p>
             </div>
             <div className="fr">
               <DollarOutlined className="icon" style={{ color: "#62c9cb" }} />
@@ -176,7 +172,7 @@ function Dashboard() {
           <Card className="clearfix">
             <div className="fl area">
               <h2>2897</h2>
-              <p>入住企业总数（家）</p>
+              <p> Total Enterprises(units)</p>
             </div>
             <div className="fr">
               <LaptopOutlined className="icon" style={{ color: "#e49362" }} />
@@ -188,29 +184,29 @@ function Dashboard() {
         <Col span={12}>
           {" "}
           <Card>
-            能源消耗情况
+            Energy consumption for the day
             <ReactECharts option={data}></ReactECharts>
           </Card>
         </Col>
         <Col span={12}>
           <Card>
-            企业资质情况
+            Enterprise qualifications(units)
             <ReactECharts option={option2}></ReactECharts>
           </Card>
         </Col>
       </Row>
       <Row gutter={16} className="mt">
         <Col span={12}>
-          <Card title="租赁情况">
+          <Card title="Rental status">
             <ReactECharts option={option3}></ReactECharts>
           </Card>
         </Col>
         <Col span={6}>
-          <Card title="充电桩空闲统计">
+          <Card title="Charging pile idle statistics">
             <div className="wrap">
               <Progress type="circle" percent={75}></Progress>
               <Statistic
-                title="总充电桩数"
+                title="Total number of charging piles"
                 value={75}
                 suffix="/ 100"
                 className="mt"
@@ -219,35 +215,23 @@ function Dashboard() {
           </Card>
         </Col>
         <Col span={6}>
-          <Card title="实施车辆信息" style={{ height: "405px" }}>
+          <Card
+            title="Implement vehicle information"
+            style={{ height: "405px" }}
+          >
             <Timeline
               items={[
                 {
                   children: (
                     <>
-                      <Tag color="green">进场</Tag>08:24车辆 京A66666
+                      <Tag color="green">Arrival</Tag>08:24 Vehicle SA123ABC
                     </>
                   ),
                 },
                 {
                   children: (
                     <>
-                      <Tag color="red">出场</Tag>09:15 车辆 京A66666{" "}
-                    </>
-                  ),
-                  color: "red",
-                },
-                {
-                  children: (
-                    <>
-                      <Tag color="green">进场</Tag>09:22 车辆 京A23456{" "}
-                    </>
-                  ),
-                },
-                {
-                  children: (
-                    <>
-                      <Tag color="red">出场</Tag>10:43 车辆 京A18763{" "}
+                      <Tag color="red">Departure</Tag>09:15 Vehicle SA123ABC{" "}
                     </>
                   ),
                   color: "red",
@@ -255,19 +239,34 @@ function Dashboard() {
                 {
                   children: (
                     <>
-                      <Tag color="green">进场</Tag>13:38 车辆 京A88888{" "}
+                      <Tag color="green">Arrival</Tag>09:22 Vehicle SA456DEF{" "}
                     </>
                   ),
                 },
                 {
                   children: (
                     <>
-                      <Tag color="green">进场</Tag>14:46 车辆 京A23456{" "}
+                      <Tag color="red">Departure</Tag>10:43 Vehicle SA789GHI{" "}
+                    </>
+                  ),
+                  color: "red",
+                },
+                {
+                  children: (
+                    <>
+                      <Tag color="green">Arrival</Tag>13:38 Vehicle SA101JKL{" "}
+                    </>
+                  ),
+                },
+                {
+                  children: (
+                    <>
+                      <Tag color="green">Arrival</Tag>14:46 Vehicle SA234MNO{" "}
                     </>
                   ),
                 },
               ]}
-            ></Timeline>
+            />
           </Card>
         </Col>
       </Row>

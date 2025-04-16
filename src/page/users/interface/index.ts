@@ -1,12 +1,12 @@
 export interface DataType {
-  id: string
-  name: string
-  status: string
-  tel: number
-  business: string
-  email: string
-  creditCode: string
-  industryNum: string
-  organizationCode: string
-  legalPerson: string
+  id: string;
+  name: string; // Customer Name
+  companyName: string;
+  abn: string;
+  acn: string;
+  status: number;
+  tel: string;
+  email: string;
+  business: string;
+  shareholders: string;
 }
