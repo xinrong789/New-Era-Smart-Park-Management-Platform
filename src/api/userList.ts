@@ -1,24 +1,24 @@
-import { post } from "../utils/http/request"
-import type { DataType } from "../page/users/interface"
+import { post } from "../utils/http/request";
+import type { DataType } from "../page/users/interface";
 interface searchType {
-  page: number
-  pageSize: number
-  companyNamne?: string
-  contact?: string
-  tel?: string
+  page: number;
+  pageSize: number;
+  companyNamne?: string;
+  contact?: string;
+  tel?: string;
 }
 export function getUserList(data: searchType) {
-  return post("/userList", data)
+  return post("/userList", data);
 }
-// 删除客户的方法
+// delete user
 export function deleteUser(id: string) {
-  return post("/deleteUser", { id })
+  return post("/deleteUser", { id });
 }
-//批量删除客户
+//batch delete user
 export function batchDeleteUser(ids: React.Key[]) {
-  return post("/batchDeleteUser", { ids })
+  return post("/batchDeleteUser", { ids });
 }
-//编辑/新增 企业接口
+//add edit company
 export function editUser(data: DataType) {
-  return post("/editUser", data)
+  return post("/editUser", data);
 }

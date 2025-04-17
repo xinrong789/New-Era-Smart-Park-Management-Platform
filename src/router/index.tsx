@@ -7,6 +7,9 @@ const Home = React.lazy(() => import("../page/home"));
 const Login = React.lazy(() => import("../page/login"));
 const NotFound = React.lazy(() => import("../page/notFound"));
 const Dashboard = React.lazy(() => import("../page/dashboard"));
+const Contractdetail = React.lazy(
+  () => import("../page/finance/contractdetail")
+);
 
 export const routes: RouteObject[] = [
   // {
@@ -33,6 +36,10 @@ export const routes: RouteObject[] = [
         index: true, // 默认访问 / 就跳转到 /dashboard
         element: <Navigate to="dashboard" />,
       },
+      // {
+      //   path: "finance/contractdetail",
+      //   element: <ContractDetail />,
+      // },
     ],
   },
   {
@@ -42,6 +49,10 @@ export const routes: RouteObject[] = [
         <Login />
       </RequireAuth>
     ),
+  },
+  {
+    path: "finance/contractdetail",
+    element: <Contractdetail />,
   },
 
   {

@@ -38,6 +38,7 @@ function Users() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const dispatch = useDispatch();
+
   const disabled = useMemo(() => {
     return selectedRowKeys.length ? false : true;
   }, [selectedRowKeys]);
@@ -140,11 +141,11 @@ function Users() {
       key: "abn",
       dataIndex: "abn",
     },
-    {
-      title: "ACN",
-      key: "acn",
-      dataIndex: "acn",
-    },
+    // {
+    //   title: "ACN",
+    //   key: "acn",
+    //   dataIndex: "acn",
+    // },
 
     {
       title: "Business Status",
@@ -154,9 +155,7 @@ function Users() {
         if (value == 1) {
           return <Tag color="green">Active</Tag>;
         } else if (value == 2) {
-          return <Tag color="#f50">Temporarily Closed</Tag>;
-        } else if (value == 3) {
-          return <Tag color="red">Closed</Tag>;
+          return <Tag color="#f50">Closed</Tag>;
         }
       },
     },
@@ -171,11 +170,11 @@ function Users() {
       key: "email",
       dataIndex: "email",
     },
-    {
-      title: "Industry",
-      key: "business",
-      dataIndex: "business",
-    },
+    // {
+    //   title: "Industry",
+    //   key: "business",
+    //   dataIndex: "business",
+    // },
     {
       title: "Shareholders",
       key: "shareholders",

@@ -7,162 +7,163 @@ import {
   Button,
   Tag,
   Progress,
-  Badge
-} from "antd"
-import type { TableProps } from "antd"
+  Badge,
+} from "antd";
+import type { TableProps } from "antd";
 
 interface DataType {
-  key: string
-  name: string
-  person: string
-  tel: string
-  status: string
-  vacancyRate: number
-  propertyFee: string
+  key: string;
+  name: string;
+  person: string;
+  tel: string;
+  status: string;
+  vacancyRate: number;
+  propertyFee: string;
 }
 
 const columns: TableProps<DataType>[`columns`] = [
   {
     title: "No.",
     key: "index",
-    render: (value, record, index) => index + 1
+    render: (value, record, index) => index + 1,
   },
   {
-    title: "楼宇名称",
+    title: "Building Name",
     dataIndex: "name",
-    key: "name"
+    key: "name",
   },
   {
-    title: "负责人",
+    title: "Manager",
     dataIndex: "person",
-    key: "person"
+    key: "person",
   },
   {
-    title: "负责人电话",
+    title: "Manager Phone",
     dataIndex: "tel",
-    key: "tel"
+    key: "tel",
   },
   {
-    title: "使用状态",
+    title: "Usage Status",
     dataIndex: "status",
     key: "status",
     render: (value) => {
-      if (value == 1) {
-        return <Tag color="#f50">建设中</Tag>
-      } else if (value == 2) {
-        return <Tag color="#2db7f5">已竣工</Tag>
+      if (value === 1) {
+        return <Tag color="#f50">Under Construction</Tag>;
+      } else if (value === 2) {
+        return <Tag color="#2db7f5">Completed</Tag>;
       } else {
-        return <Tag color="#87d068">使用中</Tag>
+        return <Tag color="#87d068">In Use</Tag>;
       }
-    }
+    },
   },
   {
-    title: "空置率",
+    title: "Vacancy Rate",
     dataIndex: "vacancyRate",
     key: "vacancyRate",
     render(value) {
-      return <Progress percent={value} status="active" />
-    }
+      return <Progress percent={value} status="active" />;
+    },
   },
   {
-    title: "物业费率",
+    title: "Property Fee Rate",
     dataIndex: "propertyFee",
     key: "propertyFee",
     render(value) {
-      return <Badge color="green" text={value}></Badge>
-    }
+      return <Badge color="green" text={value}></Badge>;
+    },
   },
   {
-    title: "操作",
+    title: "Actions",
     key: "operate",
     render(value) {
       return (
         <>
           <Button type="primary" className="mr">
-            编辑
+            Edit
           </Button>
           <Button type="primary" danger>
-            删除
+            Delete
           </Button>
         </>
-      )
-    }
-  }
-]
+      );
+    },
+  },
+];
+
 const data: DataType[] = [
   {
     key: "1",
-    name: "A1幢写字楼",
-    person: "王达",
+    name: "Building A1 Office",
+    person: "Wang Da",
     tel: "16654789654",
-    status: "建设中",
+    status: "Under Construction",
     vacancyRate: 60,
-    propertyFee: "3.5%"
+    propertyFee: "3.5%",
   },
   {
     key: "2",
-    name: "A2幢写字楼",
-    person: "苏乐凯",
+    name: "Building A2 Office",
+    person: "Su Lekai",
     tel: "13698756669",
-    status: "已竣工",
+    status: "Completed",
     vacancyRate: 40,
-    propertyFee: "3.8%"
+    propertyFee: "3.8%",
   },
   {
     key: "3",
-    name: "B1幢写字楼",
-    person: "莉亚",
+    name: "Building B1 Office",
+    person: "Liya",
     tel: "15587966698",
-    status: "使用中",
+    status: "In Use",
     vacancyRate: 20,
-    propertyFee: "3.1%"
+    propertyFee: "3.1%",
   },
   {
     key: "4",
-    name: "B2幢写字楼",
-    person: "常可",
+    name: "Building B2 Office",
+    person: "Chang Ke",
     tel: "13698756324",
-    status: "使用中",
+    status: "In Use",
     vacancyRate: 30,
-    propertyFee: "4.0%"
+    propertyFee: "4.0%",
   },
   {
     key: "5",
-    name: "C1幢写字楼",
-    person: "刘伟",
+    name: "Building C1 Office",
+    person: "Liu Wei",
     tel: "19878965444",
-    status: "使用中",
+    status: "In Use",
     vacancyRate: 50,
-    propertyFee: "3.5%"
+    propertyFee: "3.5%",
   },
   {
     key: "6",
-    name: "C2幢写字楼",
-    person: "孙强浩",
+    name: "Building C2 Office",
+    person: "Sun Qianghao",
     tel: "13369888562",
-    status: "使用中",
+    status: "In Use",
     vacancyRate: 10,
-    propertyFee: "2.9%"
+    propertyFee: "2.9%",
   },
   {
     key: "7",
-    name: "天汇国际大厦A座",
-    person: "马浩瀚",
+    name: "Tianhui International Tower A",
+    person: "Ma Haohan",
     tel: "13578549687",
-    status: "使用中",
+    status: "In Use",
     vacancyRate: 25,
-    propertyFee: "3.7%"
+    propertyFee: "3.7%",
   },
   {
     key: "8",
-    name: "时代金融广场",
-    person: "杨柳",
+    name: "Times Financial Plaza",
+    person: "Yang Liu",
     tel: "18745889874",
-    status: "使用中",
+    status: "In Use",
     vacancyRate: 15,
-    propertyFee: "3.3%"
-  }
-]
+    propertyFee: "3.3%",
+  },
+];
 
 function Tenement() {
   return (
@@ -170,19 +171,19 @@ function Tenement() {
       <Card className="serach">
         <Row gutter={16}>
           <Col span={4}>
-            <p>楼宇名称：</p>
+            <p>Building Name:</p>
             <Input></Input>
           </Col>
           <Col span={4}>
-            <p>负责人：</p>
+            <p>Manager:</p>
             <Input></Input>
           </Col>
           <Col span={4}>
-            <p>负责人：</p>
+            <p>Actions:</p>
             <Button className="mr" type="primary">
-              查询
+              Search
             </Button>
-            <Button>重置</Button>
+            <Button>Reset</Button>
           </Col>
         </Row>
       </Card>
@@ -190,6 +191,7 @@ function Tenement() {
         <Table columns={columns} dataSource={data}></Table>
       </Card>
     </div>
-  )
+  );
 }
-export default Tenement
+
+export default Tenement;

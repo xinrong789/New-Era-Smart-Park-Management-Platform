@@ -1,65 +1,66 @@
 import { Card, Button, Descriptions } from "antd";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DescriptionsProps } from "antd/lib";
+
 const items: DescriptionsProps["items"] = [
   {
     key: "1",
-    label: "合同类别",
-    children: "租赁合同",
+    label: "Contract Type",
+    children: "Lease Contract",
   },
   {
     key: "2",
-    label: "合同名称",
-    children: "房屋租赁合同通用模版",
+    label: "Contract Name",
+    children: "General Template for House Lease Contract",
   },
   {
     key: "3",
-    label: "合同开始日期",
+    label: "Contract Start Date",
     children: "2023-03-05",
   },
   {
     key: "4",
-    label: "合同结束日期",
+    label: "Contract End Date",
     children: "2024-03-05",
   },
   {
     key: "5",
-    label: "甲方",
-    children: "万物科技有限公司",
+    label: "Party A",
+    children: "Techwise Solutions Pty Ltd",
   },
   {
     key: "6",
-    label: "乙方",
-    children: "天明物业有限公司",
+    label: "Party B",
+    children: "Bright Property Group",
     span: 3,
   },
   {
     key: "7",
-    label: "审批状态",
-    children: "审批拒绝",
+    label: "Approval Status",
+    children: "Approval Rejected",
   },
   {
     key: "8",
-    label: "拒绝原因",
-    children: "缺少法人盖章",
+    label: "Rejection Reason",
+    children: "Missing signature of legal representative",
   },
   {
     key: "9",
-    label: "联系方式",
-    children: "18888888888",
+    label: "Contact Number",
+    children: "+61 412 345 678",
   },
   {
     key: "10",
-    label: "附加条款",
+    label: "Additional Clauses",
     children: (
       <>
-        1. 半年付，年租
+        1. Semi-annual payment, yearly rent
         <br />
-        2. 费用已包含空调费用
+        2. Air conditioning fees included
         <br />
-        3. 含两个车位使用权(不含充电桩)
+        3. Includes rights to two parking spaces (no charging station)
         <br />
-        4. 9:00-18:00禁止装修
+        4. Renovation prohibited between 9:00 AM and 6:00 PM
       </>
     ),
   },
@@ -68,76 +69,75 @@ const items: DescriptionsProps["items"] = [
 const items2: DescriptionsProps["items"] = [
   {
     key: "1",
-    label: "所有楼宇",
-    children: "A1幢写字楼",
+    label: "Building(s)",
+    children: "A1 Office Tower",
   },
   {
     key: "2",
-    label: "房间号",
+    label: "Room Number",
     children: "406",
   },
   {
     key: "3",
-    label: "房屋面积",
+    label: "Room Area",
     children: "96㎡",
   },
   {
     key: "4",
-    label: "计价面积",
+    label: "Valuation Area",
     children: "70㎡",
   },
   {
     key: "5",
-    label: "物业费",
-    children: "6800",
+    label: "Property Fee",
+    children: "$6,800",
   },
   {
     key: "6",
-    label: "房屋状态",
-    children: "精装",
+    label: "Room Condition",
+    children: "Fully furnished",
   },
   {
     key: "7",
-    label: "物业管家",
-    children: "蔡文萍",
+    label: "Property Manager",
+    children: "Sarah Thompson",
   },
   {
     key: "8",
-    label: "管家电话",
-    children: "17777777777",
+    label: "Manager's Contact",
+    children: "+61 423 987 654",
   },
 ];
+
 function Contractdetail() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
   return (
     <div>
-      {" "}
       <Card>
         <Button
           type="primary"
           onClick={() => navigate("/finance/contract?return=true")}
         >
-          {" "}
-          返回
+          Return
         </Button>
       </Card>
       <Card className="mt">
         <Descriptions
-          title={`合同编号:${searchParams.get("contractNo")}`}
+          title={`Contract No.: ${searchParams.get("contractNo")}`}
           bordered
           items={items}
-        ></Descriptions>
+        />
         <Descriptions
-          title="租赁房间信息"
+          title="Leased Room Information"
           bordered
           items={items2}
           className="mt"
-        >
-          {" "}
-        </Descriptions>
+        />
       </Card>
     </div>
   );
 }
+
 export default Contractdetail;

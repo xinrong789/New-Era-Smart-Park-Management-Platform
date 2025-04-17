@@ -50,112 +50,114 @@ function Bill() {
       render(value, record, index) {
         return index + 1;
       },
-      width: 100,
+      width: 55,
       fixed: "left",
     },
     {
-      title: "账单号",
+      title: "Bill Number",
       dataIndex: "accountNo",
       key: "accountNo",
-      width: 150,
+      width: 100,
     },
     {
-      title: "缴费状态",
+      title: "Payment Status",
       dataIndex: "status",
       key: "status",
       width: 100,
       render(value) {
         return value == 1 ? (
-          <Tag color="green">已缴费</Tag>
+          <Tag color="green">Paid</Tag>
         ) : (
-          <Tag color="red">未缴费</Tag>
+          <Tag color="red">Unpaid</Tag>
         );
       },
     },
     {
-      title: "房屋号",
+      title: "Room Number",
       dataIndex: "roomNo",
       key: "roomNo",
       width: 100,
     },
     {
-      title: "车位号",
+      title: "Parking Space Number",
       dataIndex: "carNo",
       key: "carNo",
       width: 100,
     },
     {
-      title: "手机号",
+      title: "Phone Number",
       dataIndex: "tel",
       key: "tel",
       width: 150,
     },
     {
-      title: "物业费(年)",
+      title: "Property Fee (Year)",
       dataIndex: "costName1",
       key: "costName1",
-      width: 150,
+      width: 100,
     },
 
     {
-      title: "车位费",
+      title: "Parking Fee",
       dataIndex: "costName2",
       key: "costName2",
-      width: 150,
+      width: 90,
     },
     {
-      title: "房屋租金",
+      title: "House Rent",
       dataIndex: "costName3",
       key: "costName3",
-      width: 150,
+      width: 100,
     },
 
     {
-      title: "开始时间",
+      title: "Start Date",
       dataIndex: "startDate",
       key: "startDate",
-      width: 150,
+      width: 100,
     },
     {
-      title: "结束时间",
+      title: "End Date",
       dataIndex: "endDate",
       key: "endDate",
-      width: 150,
+      width: 100,
     },
     {
-      title: "优惠金额",
+      title: "Discount Amount",
       dataIndex: "preferential",
       key: "preferential",
-      width: 150,
+      width: 100,
     },
     {
-      title: "合计应收金额",
+      title: "Total Receivable Amount",
       dataIndex: "money",
       key: "money",
       width: 150,
     },
     {
-      title: "支付方式",
+      title: "Payment Method",
       dataIndex: "pay",
       key: "pay",
       width: 100,
     },
     {
-      title: "操作",
-      width: 230,
+      title: "Actions",
+
+      align: "center",
+      width: 270,
       key: "operate",
       fixed: "right",
       render(value) {
         return (
           <>
             <Button type="primary" size="small">
-              打印
+              Print
             </Button>
             <Button type="primary" size="small" danger className="ml mr">
-              账单作废
+              Void Bill
             </Button>
             <Button type="primary" size="small">
-              退款
+              Refund
             </Button>
           </>
         );
@@ -257,54 +259,56 @@ function Bill() {
       <Card>
         <Row gutter={16}>
           <Col span={6}>
-            <Statistic title="应收账单金额" value="16,876.38" />
+            <Statistic title="Receivable Amount" value="16,876.38" />
           </Col>
           <Col span={6}>
-            <Statistic title="已缴账单金额" value="6,952.00" />
+            <Statistic title="Paid Amount" value="6,952.00" />
           </Col>
           <Col span={6}>
-            <Statistic title="已退账单金额" value="2,355.23" />
+            <Statistic title="Refunded Amount" value="2,355.23" />
           </Col>
           <Col span={6}>
-            <Statistic title="未缴账单金额" value="9,962.00" />
+            <Statistic title="Unpaid Amount" value="9,962.00" />
           </Col>
         </Row>
       </Card>
       <Card className="mt search">
         <Row gutter={16}>
           <Col span={6}>
-            <p>账单日期</p>
+            <p>Bill Date:</p>
             <RangePicker
               name="date"
-              style={{ width: "100%" }}
+              style={{ width: "100%", height: "35px" }}
               onChange={handleChange}
             />
           </Col>
+
           <Col span={6}>
-            <p>房/车号：</p>
+            <p style={{ width: "100%" }}>Room/Parking No.:</p>
             <Input
-              placeholder="请输入门牌号或者车位号"
+              style={{ width: "600px", height: "35px" }}
+              placeholder="Please enter room number or parking space number"
               value={formData.no}
               onChange={handleChange1}
             />
           </Col>
           <Col span={6}>
-            <p>缴费情况</p>
+            <p>Payment Status</p>
             <Select
               style={{ width: "100%" }}
               options={[
-                { value: "1", label: "全部" },
-                { value: "2", label: "已缴纳" },
-                { value: "3", label: "未缴纳" },
+                { value: "1", label: "All" },
+                { value: "2", label: "Paid" },
+                { value: "3", label: "Unpaid" },
               ]}
               onChange={handleChange2}
             ></Select>
           </Col>
           <Col span={6}>
             <Button type="primary" className="mr" onClick={loadData}>
-              查询
+              Search
             </Button>
-            <Button>重置</Button>
+            <Button>Reset</Button>
           </Col>
         </Row>
       </Card>
@@ -315,7 +319,7 @@ function Bill() {
           disabled={disabled}
           onClick={() => exportToExcel(selectedRows, header)}
         >
-          导出为Excel
+          Export to Excel
         </Button>
         <Button
           icon={<DeleteOutlined />}
@@ -324,7 +328,7 @@ function Bill() {
           type="primary"
           disabled={disabled}
         >
-          批量作废
+          Batch Void
         </Button>
       </Card>
       <Card className="mt">

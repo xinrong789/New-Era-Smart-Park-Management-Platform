@@ -99,11 +99,11 @@ const menuList = [
         label: "Contract Management",
         key: "/finance/contract",
       },
-      {
-        icon: "FrownOutlined",
-        label: "Contract details",
-        key: "/finance/contractdetail",
-      },
+      // {
+      //   icon: "FrownOutlined",
+      //   label: "Contract details",
+      //   key: "/finance/contractdetail",
+      // },
       {
         icon: "FileTextOutlined",
         label: "Billing Management",
@@ -394,7 +394,7 @@ Mock.mock("http://www.demo.com/userList", "post", (options: any) => {
             "@word(4,8) @pick(['Solutions', 'Systems', 'Corporation', 'Technologies', 'Enterprises', 'Group', 'Holdings']) Pty Ltd", // 英文公司名
           abn: "@string('number',11)", // ABN
           acn: "@string('number',9)", // ACN
-          "status|1": [1, 1, 1, 1, 2, 3], // Business Status
+          "status|1": [1, 1, 1, 1, 2], // Business Status
           tel: "@phone", // Phone Number
           email: "@email", // Email
           "business|1": [
@@ -414,96 +414,102 @@ Mock.mock("http://www.demo.com/userList", "post", (options: any) => {
   };
 });
 
-//删除企业接口
+//delete company
 
 Mock.mock("http://www.demo.com/deleteUser", "post", (options: any) => {
-  console.log("删除成功:", options);
+  console.log("Deleted successfully:", options);
   return {
     code: 200,
-    message: "成功",
-    data: "操作成功",
+    message: "success",
+    data: "Operation successful",
   };
 });
-// 批量删除
+// batch deletion
 Mock.mock("http://www.demo.com/batchDeleteUser", "post", (options: any) => {
   const { ids } = JSON.parse(options.body);
   console.log("ids", ids);
   return {
     code: 200,
-    message: "成功",
-    data: "操作成功",
+    message: "success",
+    data: "Operation successful",
   };
 });
-//编辑企业
+//edit conpany
 Mock.mock("https://www.demo.com/editUser", "post", (options: any) => {
   console.log("编辑企业收到参数", JSON.parse(options.body));
   return {
     code: 200,
-    message: "成功",
-    data: "操作成功",
+    message: "success",
+    data: "Operation successful",
   };
 });
 
-//获取房间列表的接口
+//get room list
 
-// 定义生成房间数据的方法
 const generateRooms = () => {
   return Mock.mock({
     "rooms|5-10": [
-      // 随机生成 5-10 个房间
       {
-        "id|+1": 1, // 递增 ID
-        name: "@cword(3, 5)房间", // 随机生成 3-5 个汉字作为房间名称
-        "price|100-500": 1, // 价格随机在 100-500 之间
-        "status|1": ["空闲", "已预订", "维修中"], // 随机选择房间状态src:"http"
+        "id|+1": 1, // Auto-increment ID
+        "roomNumber|+1": 1001, // 起始房号
+        decorationType: "@pick(['Unfurnished', 'Fully Furnished'])",
+        "area|50-150": 1, // 房间面积
+        "unitPrice|1000-3000": 1, // 每月租金
+        src: "@image('300x200', '#50B347', '#FFF', 'Room')", // 随机图像
       },
     ],
   }).rooms;
 };
 
-// 拦截请求
 Mock.mock("http://www.demo.com/roomList", "post", (options: any) => {
-  console.log("收到房间id", JSON.parse(options.body).roomid);
+  console.log("room id", JSON.parse(options.body).roomid);
   return {
     code: 200,
-    message: "成功",
+    message: "success",
     data: {
       rooms: generateRooms(),
     },
   };
 });
 
-//合同管理
+//contrct
 Mock.mock("http://www.demo.com/contractList", "post", (options: any) => {
   const { page, pageSize } = JSON.parse(options.body);
-  console.log("后端合同管理接到参数", JSON.parse(options.body));
-  console.log("hhhh", Mock);
+  console.log(
+    "Backend received parameters for contract management",
+    JSON.parse(options.body)
+  );
+  // console.log("hhhh", Mock);
   return {
     code: 200,
-    message: "成功",
+    message: "Success",
     data: Mock.mock({
       [`list|${pageSize}`]: [
         {
           contractNo: '@string("number", 6)',
-          "type|1": ["租赁合同", "自定义合同", "购买合同"],
+          "type|1": ["Lease Contract", "Custom Contract", "Purchase Contract"],
           "name|1": [
-            "房屋租赁合同通用模版",
-            "车位租赁合同通用模版",
-            "商业房产买卖合同",
+            "General Template for Housing Lease Contract",
+            "General Template for Parking Space Lease Contract",
+            "Commercial Real Estate Sale Contract",
           ],
           "startDate|1": ["2023-01-01", "2023-03-05", "2023-04-01"],
           "endDate|1": ["2024-01-01", "2024-03-05", "2024-04-01"],
-          "jia|1": ["万物科技有限公司", "大鱼网络科技", "六六信息技术有限公司"],
-          yi: "天明物业有限公司",
+          "jia|1": [
+            "Wantu Technology Co., Ltd.",
+            "Dayu Network Technology",
+            "Liuliu Information Technology Co., Ltd.",
+          ],
+          yi: "Tianming Property Co., Ltd.",
           "status|1": ["1", "2", "3"],
         },
       ],
       total: 54,
     }),
-    // 生成55条数据
   };
 });
-//账单管理
+
+//bill
 Mock.mock("http://www.demo.com/billList", "post", (options: any) => {
   const { page, pageSize, companyName, contact, phone } = JSON.parse(
     options.body
@@ -537,7 +543,6 @@ Mock.mock("http://www.demo.com/billList", "post", (options: any) => {
       ],
       total: 54,
     }),
-    // 生成55条数据
   };
 });
 //账号管理

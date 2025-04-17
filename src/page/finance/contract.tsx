@@ -79,6 +79,7 @@ function Dashboard() {
     dispatch(setTotal(total));
   };
   const detail = (contractNo: string) => {
+    // navigate("/finance/contractdetail" + contractNo);
     navigate("/finance/contractdetail?contractNo=" + contractNo);
   };
   const reset = () => {
@@ -108,56 +109,56 @@ function Dashboard() {
       },
     },
     {
-      title: "合同编号",
+      title: "Contract No.",
       dataIndex: "contractNo",
       key: "contractNo",
     },
     {
-      title: "合同类别",
+      title: "Contract Type",
       dataIndex: "type",
       key: "type",
     },
     {
-      title: "合同名称",
+      title: "Contract Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "合同开始日期",
+      title: "Contract Start Date",
       dataIndex: "startDate",
       key: "startDate",
     },
     {
-      title: "合同结束如期",
+      title: "Contract End Date",
       dataIndex: "endDate",
       key: "endDate",
     },
     {
-      title: "甲方",
+      title: "Party A",
       dataIndex: "jia",
       key: "jia",
     },
     {
-      title: "乙方",
+      title: "Party B",
       dataIndex: "yi",
       key: "yi",
     },
     {
-      title: "审批状态",
+      title: "Approval Status",
       dataIndex: "status",
       key: "status",
       render(value) {
         if (value == 1) {
-          return <Tag>未审批</Tag>;
+          return <Tag>Not Approved</Tag>;
         } else if (value == 2) {
-          return <Tag color="green">审批通过</Tag>;
+          return <Tag color="green">Approved</Tag>;
         } else {
-          return <Tag color="red">审批拒绝</Tag>;
+          return <Tag color="red">Rejected</Tag>;
         }
       },
     },
     {
-      title: "操作",
+      title: "Action",
       key: "operate",
       render(value, record) {
         return (
@@ -166,18 +167,19 @@ function Dashboard() {
             size="small"
             onClick={() => detail(record.contractNo)}
           >
-            合同详情
+            Contract Details
           </Button>
         );
       },
     },
   ];
+
   return (
     <div>
       <Card className="search">
         <Row gutter={16}>
           <Col span={7}>
-            <p>合同编号：</p>
+            <p>Contract No.:</p>
             <Input
               name="contractNo"
               value={formData.contractNo}
@@ -185,7 +187,7 @@ function Dashboard() {
             />
           </Col>
           <Col span={7}>
-            <p>联系人：</p>
+            <p>Contact Person:</p>
             <Input
               name="person"
               value={formData.person}
@@ -193,7 +195,7 @@ function Dashboard() {
             />
           </Col>
           <Col span={7}>
-            <p>联系电话：</p>
+            <p>Phone Number:</p>
             <Input name="tel" value={formData.tel} onChange={handleChange} />
           </Col>
           <Col span={3}>
@@ -202,9 +204,9 @@ function Dashboard() {
               className="mr"
               onClick={() => loadData(page, pageSize)}
             >
-              查询
+              Search
             </Button>
-            <Button onClick={reset}>重置</Button>
+            <Button onClick={reset}>Reset</Button>
           </Col>
         </Row>
       </Card>
