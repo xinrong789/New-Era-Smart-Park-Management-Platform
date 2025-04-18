@@ -3,10 +3,12 @@ import { TableProps } from "antd/lib";
 import Column from "antd/es/table/Column";
 import useDataList from "../../hooks/useDataList";
 import { getEquipmentList } from "../../api/equipments";
+
 interface SearchType {
   name: string;
   person: string;
 }
+
 interface DataType {
   id: number;
   no: string;
@@ -20,6 +22,7 @@ interface DataType {
   type: string;
   from: string;
 }
+
 const columns: TableProps<DataType>["columns"] = [
   {
     title: "No.",
@@ -27,77 +30,78 @@ const columns: TableProps<DataType>["columns"] = [
     render: (text, record, index) => index + 1,
   },
   {
-    title: "设备名称",
+    title: "Equipment Name",
     dataIndex: "name",
     key: "name",
   },
   {
-    title: "设备编号",
+    title: "Equipment No.",
     dataIndex: "no",
     key: "no",
   },
   {
-    title: "负责人",
+    title: "Responsible Person",
     dataIndex: "person",
     key: "person",
   },
   {
-    title: "负责人电话",
+    title: "Contact Number",
     dataIndex: "tel",
     key: "tel",
   },
   {
-    title: "理论寿命",
+    title: "Expected Lifespan",
     dataIndex: "time",
     key: "time",
   },
   {
-    title: "剩余寿命",
+    title: "Remaining Lifespan",
     dataIndex: "rest",
     key: "rest",
   },
   {
-    title: "使用状态",
+    title: "Usage Status",
     dataIndex: "status",
     key: "status",
     render: (text) => {
       if (text == 1) {
-        return <Tag color="green">使用中</Tag>;
+        return <Tag color="green">In Use</Tag>;
       } else if (text == 2) {
-        return <Tag color="yellow">维护中</Tag>;
+        return <Tag color="yellow">Under Maintenance</Tag>;
       } else {
-        return <Tag color="red">已损坏</Tag>;
+        return <Tag color="red">Damaged</Tag>;
       }
     },
   },
   {
-    title: "最近保养日期",
+    title: "Last Maintenance Date",
     dataIndex: "last",
     key: "last",
   },
   {
-    title: "规格型号",
+    title: "Model/Type",
     dataIndex: "type",
     key: "type",
   },
   {
-    title: "生产厂家",
+    title: "Manufacturer",
     dataIndex: "from",
     key: "from",
   },
   {
-    title: "操作",
+    title: "Actions",
     dataIndex: "operate",
     key: "operate",
     render: () => {
       return (
         <Button type="primary" size="small">
-          详细
+          Details
         </Button>
       );
     },
   },
 ];
+
 function Equipment() {
   const {
     dataList,
@@ -113,7 +117,6 @@ function Equipment() {
     setLoading,
     setFormData,
     reset,
-
     loadData,
     onChange,
     handleChange,
@@ -127,35 +130,41 @@ function Equipment() {
 
   return (
     <div>
-      {" "}
       <Card className="search">
-        <Row>
+        <Row gutter={16}>
+          {" "}
           <Col span={7}>
-            <p>设备名称：</p>{" "}
+            <p>Equipment Name:</p>
             <Input
               value={formData.name}
               name="name"
-              placeholder="请输入设备名称或编号"
+              placeholder="Enter equipment name or number"
               onChange={handleChange}
-            ></Input>
+            />
           </Col>
           <Col span={7}>
-            <p>负责人：</p>{" "}
+            <p>Responsible Person:</p>
             <Input
               value={formData.person}
               name="person"
-              placeholder="请输入负责人姓名"
+              placeholder="Enter responsible person's name"
               onChange={handleChange}
-            ></Input>
+            />
           </Col>
           <Col span={3}>
-            <Button type="primary" className="mr" onClick={loadData}>
-              查询
+            <Button
+              type="primary"
+              className="mr"
+              onClick={loadData}
+              style={{ marginRight: "10px" }}
+            >
+              Search
             </Button>
-            <Button onClick={reset}>重置</Button>
+            <Button onClick={reset}>Reset</Button>
           </Col>
         </Row>
       </Card>
+
       <Card className="mt">
         <Table
           columns={columns}
@@ -163,7 +172,8 @@ function Equipment() {
           loading={loading}
           rowKey={(record) => record.id}
           pagination={false}
-        ></Table>
+          scroll={{ x: 1200 }}
+        />
         <Pagination
           className="fr mt"
           showQuickJumper
@@ -177,4 +187,5 @@ function Equipment() {
     </div>
   );
 }
+
 export default Equipment;

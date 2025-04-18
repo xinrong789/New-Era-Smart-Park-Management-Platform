@@ -10,11 +10,11 @@ const Contract = lazy(() => import("../page/finance/contract"));
 const Contractdetail = lazy(() => import("../page/finance/contractdetail"));
 const Bill = lazy(() => import("../page/finance/bill"));
 const Merchants = lazy(() => import("../page/merchants"));
-const All = lazy(() => import("../page/operation/all"));
-const Article = lazy(() => import("../page/operation/articles"));
-const Comments = lazy(() => import("../page/operation/comments"));
+// const All = lazy(() => import("../page/operation/all"));
+// const Article = lazy(() => import("../page/operation/articles"));
+// const Comments = lazy(() => import("../page/operation/comments"));
 const Equipment = lazy(() => import("../page/equipment"));
-const Energy = lazy(() => import("../page/energy"));
+//const Energy = lazy(() => import("../page/energy"));
 const Settings = lazy(() => import("../page/settings"));
 const Personal = lazy(() => import("../page/personal"));
 export const componentMap: any = {
@@ -29,11 +29,11 @@ export const componentMap: any = {
   "/finance/contractdetail": <Contractdetail />,
   "/finance/bill": <Bill />,
   "/merchants": <Merchants />,
-  "/operation/all": <All />,
-  "/operation/article": <Article />,
-  "/operation/comments": <Comments />,
+  // "/operation/all": <All />,
+  // "/operation/article": <Article />,
+  // "/operation/comments": <Comments />,
   "/equipment": <Equipment />,
-  "/energy": <Energy />,
+  // "/energy": <Energy />,
   "/settings": <Settings />,
   "/personal": <Personal />,
 };

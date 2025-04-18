@@ -66,32 +66,32 @@ function Settings() {
       render: (text: any, record: any, index: any) => index + 1,
     },
     {
-      title: "账号名称",
+      title: "Account Name",
       dataIndex: "accountName",
       key: "accountName",
     },
     {
-      title: "所属权限",
+      title: "Permission",
       dataIndex: "auth",
       key: "auth",
     },
     {
-      title: "使用人",
+      title: "User",
       dataIndex: "person",
       key: "person",
     },
     {
-      title: "使用人电话",
+      title: "Phone Number",
       dataIndex: "tel",
       key: "tel",
     },
     {
-      title: "所属部门",
+      title: "Department",
       dataIndex: "department",
       key: "department",
     },
     {
-      title: "操作",
+      title: "Actions",
       key: "operate",
       render(value: string, record: any) {
         return (
@@ -102,16 +102,16 @@ function Settings() {
               className="mr"
               onClick={() => edit(record.menu, record.accountName)}
             >
-              修改权限
+              Edit Permissions
             </Button>
             <Popconfirm
-              title="操作提示"
-              description="确认要删除当前账号吗？"
-              okText="是"
-              cancelText="否"
+              title="Confirmation"
+              description="Are you sure you want to delete this account?"
+              okText="Yes"
+              cancelText="No"
             >
               <AuthButton size="small" type="primary" danger>
-                删除账号
+                Delete Account
               </AuthButton>
             </Popconfirm>
           </>
@@ -120,7 +120,7 @@ function Settings() {
     },
   ];
 
-  const [accountName, setAccountName] = useState<string>("当前用户");
+  const [accountName, setAccountName] = useState<string>("Current User");
   const { menuList } = useSelector((state: any) => state.authSlice);
   const [checkedKeys, setCheckedKeys] = useState<React.Key[]>([]);
   const {
@@ -141,95 +141,67 @@ function Settings() {
     handleChange,
     reset,
   } = useDataList<SearchType, DataType>({ accountName: "" }, getAccountList);
+
   const treeData: TreeDataNode[] = [
     {
-      title: "工作台",
+      title: "Dashboard",
       key: "/dashboard",
     },
     {
-      title: "租户管理",
-      key: "/users",
-      children: [
-        { title: "租户列表", key: "/users/list" },
-        { title: "新增租户", key: "/users/add" },
-      ],
+      title: "Tenant Management",
+      key: "/users/list",
     },
     {
-      title: "物业管理",
+      title: "Property Management",
       key: "/estate",
       children: [
         {
-          title: "楼宇管理",
+          title: "Building Management",
           key: "/estate/tenement",
         },
         {
-          title: "房间管理",
+          title: "Room Management",
           key: "/estate/room",
         },
         {
-          title: "车辆信息",
+          title: "Vehicle Information",
           key: "/estate/car",
         },
       ],
     },
     {
-      title: "报修管理",
+      title: "Repair Management",
       key: "/repair",
     },
     {
-      title: "财务管理",
+      title: "Finance Management",
       key: "/finance",
       children: [
         {
-          title: "合同管理",
+          title: "Contract Management",
           key: "/finance/contract",
         },
+
         {
-          title: "合同详情",
-          key: "/finance/surrender",
-        },
-        {
-          title: "账单管理",
+          title: "Billing Management",
           key: "/finance/bill",
         },
       ],
     },
     {
-      title: "招商管理",
+      title: "Business Management",
       key: "/merchants",
     },
     {
-      title: "运营管理",
-      key: "/operation",
-      children: [
-        {
-          title: "运营总览",
-          key: "/operation/all",
-        },
-        {
-          title: "文章发布",
-          key: "/operation/article",
-        },
-        {
-          title: "内容评论",
-          key: "/operation/comments",
-        },
-      ],
-    },
-    {
-      title: "设备管理",
+      title: "Equipment Management",
       key: "/equipment",
     },
     {
-      title: "能源消耗",
-      key: "/energy",
-    },
-    {
-      title: "系统设置",
+      title: "System Settings",
       key: "/settings",
     },
     {
-      title: "个人中心",
+      title: "Personal Center",
       key: "/personal",
     },
   ];
@@ -237,9 +209,11 @@ function Settings() {
   useEffect(() => {
     setCheckedKeys(extractTreeKeys(menuList));
   }, []);
+
   const handle = () => {
     console.log(checkedKeys, accountName);
   };
+
   const onCheck: TreeProps["onCheck"] = (checkedKeys) => {
     setCheckedKeys(checkedKeys as React.Key[]);
   };
@@ -252,40 +226,40 @@ function Settings() {
             <Input
               name="accountName"
               value={formData.accountName}
-              placeholder="请输入账户名"
+              placeholder="Enter account name"
               onChange={handleChange}
-            ></Input>
+            />
           </Col>
           <Col span={8}>
             <Button type="primary" className="ml">
-              搜索
+              Search
             </Button>
           </Col>
           <Col span={8} className="tr">
-            <Button type="primary">新建账号</Button>
+            <Button type="primary">Create Account</Button>
           </Col>
         </Row>
       </Card>
 
       <Row gutter={16} className="mt">
         <Col span={8}>
-          <Card title={accountName + ":所拥权限"}>
+          <Card title={accountName + ": Permissions"}>
             <Tree
               treeData={treeData}
               checkable
               checkedKeys={checkedKeys}
               onCheck={onCheck}
-            ></Tree>
+            />
           </Card>
           <Card className="mt">
             <Popconfirm
-              title="操作提示"
-              description={`您确认要修改${accountName}用户的权限吗？`}
-              okText="是"
-              cancelText="否"
+              title="Confirmation"
+              description={`Are you sure you want to update permissions for user ${accountName}?`}
+              okText="Yes"
+              cancelText="No"
               onConfirm={handle}
             >
-              <Button type="primary">提交修改</Button>
+              <Button type="primary">Submit Changes</Button>
             </Popconfirm>
           </Card>
         </Col>
@@ -297,7 +271,7 @@ function Settings() {
               dataSource={dataList}
               rowKey={(record) => record.id}
               pagination={false}
-            ></Table>
+            />
             <Pagination
               className="fr mt"
               showQuickJumper
@@ -305,7 +279,7 @@ function Settings() {
               current={page}
               pageSize={pageSize}
               onChange={onChange}
-            ></Pagination>
+            />
           </Card>
         </Col>
       </Row>

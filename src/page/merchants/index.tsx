@@ -7,18 +7,19 @@ import { Avatar, List } from "antd";
 
 const data = [
   {
-    title: "Ant Design Title 1",
+    title: "New Contract: Tech Solutions Pty Ltd",
   },
   {
-    title: "Ant Design Title 2",
+    title: "Renewed Contract: GreenFarm Australia",
   },
   {
-    title: "Ant Design Title 3",
+    title: "New Contract: Oceanic Logistics",
   },
   {
-    title: "Ant Design Title 4",
+    title: "Renewed Contract: Sunlight Energy Co.",
   },
 ];
+
 function Merchants() {
   return (
     <div>
@@ -63,7 +64,7 @@ function Merchants() {
         <Col span={12}>
           <Card>
             <Statistic
-              title="新签客户"
+              title="New Clients"
               value={11.28}
               precision={2}
               valueStyle={{ color: "#3f8600" }}
@@ -71,7 +72,7 @@ function Merchants() {
               suffix="%"
             />
             <Statistic
-              title="续签客户"
+              title="Renewed Clients"
               value={9.3}
               precision={2}
               valueStyle={{ color: "#cf1322" }}
@@ -79,7 +80,7 @@ function Merchants() {
               suffix="%"
             />
             <Statistic
-              title="退租客户"
+              title="Terminated Clients"
               value={5.16}
               precision={2}
               valueStyle={{ color: "#3f8600" }}
@@ -87,7 +88,7 @@ function Merchants() {
               suffix="%"
             />
             <Statistic
-              title="意向客户"
+              title="Potential Clients"
               value={13.3}
               precision={2}
               valueStyle={{ color: "#cf1322" }}
@@ -100,4 +101,5 @@ function Merchants() {
     </div>
   );
 }
+
 export default Merchants;

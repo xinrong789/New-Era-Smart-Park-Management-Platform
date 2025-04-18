@@ -11,6 +11,7 @@ import {
   Badge,
 } from "antd";
 import type { DescriptionsProps } from "antd";
+
 const data = [
   {
     title: "Ant Design Title 1",
@@ -36,10 +37,11 @@ function Personal() {
                     }
                     title={
                       <a href="https://ant.design">
-                        {sessionStorage.getItem("username")}-运营专员
+                        {sessionStorage.getItem("username")} - Operations
+                        Specialist
                       </a>
                     }
-                    description="无论是打工还是生存，都要尽已所能全力以赴，优秀才是常态。"
+                    description="Whether it's for work or survival, do your best with all your might — excellence should be the norm."
                   />
                 </List.Item>
               )}
@@ -54,187 +56,198 @@ function Personal() {
           <Row gutter={16}>
             <Col span={8}>
               <Card>
-                待处理：<Badge count={4} color="#faad14"></Badge>
+                Pending Tasks: <Badge count={4} color="#faad14" />
               </Card>
               <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
                 className="mt"
               >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
                 <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
+                  Date: <Tag>2024-05-02</Tag>
                 </div>
                 <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
                 </div>
                 <div className="mt">
-                  进度：
-                  <Progress percent={1} />
-                </div>
-              </Card>
-              <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
-                className="mt"
-              >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
-                <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
-                </div>
-                <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
-                </div>
-                <div className="mt">
-                  进度：
-                  <Progress percent={1} />
-                </div>
-              </Card>{" "}
-              <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
-                className="mt"
-              >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
-                <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
-                </div>
-                <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
-                </div>
-                <div className="mt">
-                  进度：
-                  <Progress percent={1} />
-                </div>
-              </Card>
-            </Col>
-            <Col span={8}>
-              <Card>
-                待处理：<Badge count={4} color="#faad14"></Badge>
-              </Card>
-              <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
-                className="mt"
-              >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
-                <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
-                </div>
-                <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
-                </div>
-                <div className="mt">
-                  进度：
-                  <Progress percent={1} />
+                  Progress: <Progress percent={1} />
                 </div>
               </Card>
               <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
                 className="mt"
               >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
                 <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
+                  Date: <Tag>2024-05-02</Tag>
                 </div>
                 <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
                 </div>
                 <div className="mt">
-                  进度：
-                  <Progress percent={1} />
+                  Progress: <Progress percent={1} />
                 </div>
-              </Card>{" "}
+              </Card>
               <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
                 className="mt"
               >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
                 <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
+                  Date: <Tag>2024-05-02</Tag>
                 </div>
                 <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
                 </div>
                 <div className="mt">
-                  进度：
-                  <Progress percent={1} />
+                  Progress: <Progress percent={1} />
                 </div>
               </Card>
             </Col>
+
             <Col span={8}>
               <Card>
-                待处理：<Badge count={4} color="#faad14"></Badge>
+                Pending Tasks: <Badge count={4} color="#faad14" />
               </Card>
               <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
                 className="mt"
               >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
                 <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
+                  Date: <Tag>2024-05-02</Tag>
                 </div>
                 <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
                 </div>
                 <div className="mt">
-                  进度：
-                  <Progress percent={1} />
+                  Progress: <Progress percent={1} />
                 </div>
               </Card>
               <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
                 className="mt"
               >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
                 <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
+                  Date: <Tag>2024-05-02</Tag>
                 </div>
                 <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
                 </div>
                 <div className="mt">
-                  进度：
-                  <Progress percent={1} />
+                  Progress: <Progress percent={1} />
                 </div>
-              </Card>{" "}
+              </Card>
               <Card
-                title="新增账号申请"
-                extra={<a href="#">详情</a>}
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
                 className="mt"
               >
-                <p>描述：新入职员工，需要新建user权限账号</p>
-                <p className="mt">创建人：人力资源部 - 刘婷</p>
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
                 <div className="mt">
-                  日期：<Tag>2024-05-02</Tag>
+                  Date: <Tag>2024-05-02</Tag>
                 </div>
                 <div className="mt">
-                  <Tag color="blue">常规</Tag>
-                  <Tag color="blue">账号问题</Tag>
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
                 </div>
                 <div className="mt">
-                  进度：
-                  <Progress percent={1} />
+                  Progress: <Progress percent={1} />
+                </div>
+              </Card>
+            </Col>
+
+            <Col span={8}>
+              <Card>
+                Pending Tasks: <Badge count={4} color="#faad14" />
+              </Card>
+              <Card
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
+                className="mt"
+              >
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
+                <div className="mt">
+                  Date: <Tag>2024-05-02</Tag>
+                </div>
+                <div className="mt">
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
+                </div>
+                <div className="mt">
+                  Progress: <Progress percent={1} />
+                </div>
+              </Card>
+              <Card
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
+                className="mt"
+              >
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
+                <div className="mt">
+                  Date: <Tag>2024-05-02</Tag>
+                </div>
+                <div className="mt">
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
+                </div>
+                <div className="mt">
+                  Progress: <Progress percent={1} />
+                </div>
+              </Card>
+              <Card
+                title="New Account Request"
+                extra={<a href="#">Details</a>}
+                className="mt"
+              >
+                <p>
+                  Description: A new employee needs a user-permission account
+                </p>
+                <p className="mt">Created by: HR Department - Ting Liu</p>
+                <div className="mt">
+                  Date: <Tag>2024-05-02</Tag>
+                </div>
+                <div className="mt">
+                  <Tag color="blue">Routine</Tag>
+                  <Tag color="blue">Account Issue</Tag>
+                </div>
+                <div className="mt">
+                  Progress: <Progress percent={1} />
                 </div>
               </Card>
             </Col>
@@ -244,4 +257,5 @@ function Personal() {
     </div>
   );
 }
+
 export default Personal;

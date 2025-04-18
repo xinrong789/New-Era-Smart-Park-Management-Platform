@@ -241,7 +241,7 @@ function Users() {
               value={formData.contact}
               onChange={handleChange}
               name="contact"
-            ></Input>{" "}
+            ></Input>
           </Col>
           <Col span={7}>
             <p className="usertitle">Tel:</p>
