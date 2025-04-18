@@ -53,7 +53,7 @@ Mock.mock("http://www.demo.com/login", "post", (options: any) => {
 const menuList = [
   {
     icon: "DashboardOutlined",
-    label: "Workbench",
+    label: "Dashboard",
     key: "/dashboard",
   },
   {
@@ -99,11 +99,7 @@ const menuList = [
         label: "Contract Management",
         key: "/finance/contract",
       },
-      // {
-      //   icon: "FrownOutlined",
-      //   label: "Contract details",
-      //   key: "/finance/contractdetail",
-      // },
+
       {
         icon: "FileTextOutlined",
         label: "Billing Management",
@@ -142,7 +138,7 @@ const menuList = [
 const userMenuList = [
   {
     icon: "DashboardOutlined",
-    label: "Workbench",
+    label: "Dashboard",
     key: "/dashboard",
   },
 
@@ -189,7 +185,7 @@ const userMenuList = [
 const managerMenuList = [
   {
     icon: "DashboardOutlined",
-    label: "Workbench",
+    label: "Dashboard",
     key: "/dashboard",
   },
   {
